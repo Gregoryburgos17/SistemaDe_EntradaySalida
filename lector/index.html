@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lector de huella</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/index.css">
+    
+</head>
+<body>
+    <main>
+        <div class="container h-50 d-flex justify-content-center">
+            <div class="card h-100 w-50 shadow">
+                <div class="card-body d-flex  flex-column justify-content-start align-items-center">
+                    <div id="fecha"></div>
+                    <button id="fingerprint" class='btn btn-fingerprint h-50 my-3'>
+                        <i class="fas fa-fingerprint"></i>
+                    </button>
+                    <div id='scanner-scanning' class="scanner fade alert alert-info w-100 text-center">
+                        <i class='fas fa-spinner fa-spin'></i> Verificando huella, mantenga presionado
+                    </div>
+                    <div id='scanner-error' class="scanner fade alert alert-danger w-100 text-center">
+                        ¡Error! Huella no identifiacada
+                    </div>
+                    <div id='scanner-success' class="scanner fade w-100 alert alert-success text-center">
+                         Acceso correcto
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </main>
+    <script src="./js/jquery-3.2.1.slim.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/fontawesome-v6.js"></script>
+    <script src="./js/index.js"></script>
+</body>
+</html>
