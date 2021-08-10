@@ -1,4 +1,13 @@
 <!DOCTYPE html>
+<?php
+include("../conexion/conexion.php");
+include("../conexion/config.php");
+if(isset($_GET['del'])){
+  $delete="DELETE FROM user WHERE id_usuario={$_GET['del']}";
+  conexion::execute($delete);
+}
+
+?>
 <!-- saved from url=(0053)https://getbootstrap.com/docs/4.0/examples/dashboard/ -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
@@ -126,185 +135,47 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1,001</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>
-                    <div class="d-grid gap-2 d-md-block">
-                        <button class="btn btn-success" type="button">Editar</button>
-                        <button class="btn btn-danger" type="button">Eliminar</button>
-                      </div></td>
-                </tr>
-                <tr>
-                  <td>1,002</td>
-                  <td>amet</td>
-                  <td>consectetur</td>
-                  <td>
-                    <div class="d-grid gap-2 d-md-block">
-                        <button class="btn btn-success" type="button">Editar</button>
-                        <button class="btn btn-danger" type="button">Eliminar</button>
-                      </div></td>
-                </tr>
-                <tr>
-                  <td>1,003</td>
-                  <td>Integer</td>
-                  <td>nec</td>
-                  <td>
-                    <div class="d-grid gap-2 d-md-block">
-                        <button class="btn btn-success" type="button">Editar</button>
-                        <button class="btn btn-danger" type="button">Eliminar</button>
-                      </div></td>
-                </tr>
-                <tr>
-                  <td>1,003</td>
-                  <td>libero</td>
-                  <td>Sed</td>
-                  <td>
-                    <div class="d-grid gap-2 d-md-block">
-                        <button class="btn btn-success" type="button">Editar</button>
-                        <button class="btn btn-danger" type="button">Eliminar</button>
-                      </div></td>
-                </tr>
-                <tr>
-                  <td>1,004</td>
-                  <td>dapibus</td>
-                  <td>diam</td>
-                  
-                  <td>
-                    <div class="d-grid gap-2 d-md-block">
-                        <button class="btn btn-success" type="button">Editar</button>
-                        <button class="btn btn-danger" type="button">Eliminar</button>
-                      </div></td>
-                </tr>
-                <tr>
-                  <td>1,005</td>
-                  <td>Nulla</td>
-                  <td>quis</td>
-                  
-                  <td>
-                    <div class="d-grid gap-2 d-md-block">
-                        <button class="btn btn-success" type="button">Editar</button>
-                        <button class="btn btn-danger" type="button">Eliminar</button>
-                      </div></td>
-                </tr>
-                <tr>
-                  <td>1,006</td>
-                  <td>nibh</td>
-                  <td>elementum</td>
+              <?php
+                
+
+                $sql= "SELECT * FROM user";
+                $data= conexion::execute($sql);
+                foreach($data as $dato){
                  
-                  <td>
-                    <div class="d-grid gap-2 d-md-block">
-                        <button class="btn btn-success" type="button">Editar</button>
-                        <button class="btn btn-danger" type="button">Eliminar</button>
-                      </div></td>
-                </tr>
-                <tr>
-                  <td>1,007</td>
-                  <td>sagittis</td>
-                  <td>ipsum</td>
+                  echo"<tr>
+                  <td>{$dato['id_usuario']}</td>
+                  <td>{$dato['nombre']}</td>
+                  <td>Gerente</td>
+                  
                   
                   <td>
-                    <div class="d-grid gap-2 d-md-block">
-                        <button class="btn btn-success" type="button">Editar</button>
-                        <button class="btn btn-danger" type="button">Eliminar</button>
-                      </div></td>
-                </tr>
-                <tr>
-                  <td>1,008</td>
-                  <td>Fusce</td>
-                  <td>nec</td>
-                  
-                  <td>
-                    <div class="d-grid gap-2 d-md-block">
-                        <button class="btn btn-success" type="button">Editar</button>
-                        <button class="btn btn-danger" type="button">Eliminar</button>
-                      </div></td>
-                </tr>
-                <tr>
-                  <td>1,009</td>
-                  <td>augue</td>
-                  <td>semper</td>
-                  
-                  <td>
-                    <div class="d-grid gap-2 d-md-block">
-                        <button class="btn btn-success" type="button">Editar</button>
-                        <button class="btn btn-danger" type="button">Eliminar</button>
-                      </div></td>
-                </tr>
-                <tr>
-                  <td>1,010</td>
-                  <td>massa</td>
-                  <td>Vestibulum</td>
-                  
-                  <td>
-                    <div class="d-grid gap-2 d-md-block">
-                        <button class="btn btn-success" type="button">Editar</button>
-                        <button class="btn btn-danger" type="button">Eliminar</button>
-                      </div></td>
-                </tr>
-                <tr>
-                  <td>1,011</td>
-                  <td>eget</td>
-                  <td>nulla</td>
-                  
-                  <td>
-                    <div class="d-grid gap-2 d-md-block">
-                        <button class="btn btn-success" type="button">Editar</button>
-                        <button class="btn btn-danger" type="button">Eliminar</button>
+                    <div class='d-grid gap-2 d-md-block'>
+                    <a href='EditarAdmin.php?edit={$dato['id_usuario']}'class='btn btn-success' >Editar</a>
+                    <a href='AdminGerente.php?del={$dato['id_usuario']}'class='btn btn-danger'>eliminar</a>
                       </div>
-                    </td>
-                </tr>
-                <tr>
-                  <td>1,012</td>
-                  <td>taciti</td>
-                  <td>sociosqu</td>
+                  </td>
                   
-                  <td>
-                    <div class="d-grid gap-2 d-md-block">
-                        <button class="btn btn-success" type="button">Editar</button>
-                        <button class="btn btn-danger" type="button">Eliminar</button>
-                      </div></td>
                 </tr>
-                <tr>
-                  <td>1,013</td>
-                  <td>torquent</td>
-                  <td>per</td>
-                 
-                  <td>
-                    <div class="d-grid gap-2 d-md-block">
-                        <button class="btn btn-success" type="button">Editar</button>
-                        <button class="btn btn-danger" type="button">Eliminar</button>
-                      </div>
-                    </td>
-                </tr>
-                <tr>
-                  <td>1,014</td>
-                  <td>per</td>
-                  <td>inceptos</td>
-                  
-                  <td> <div class="d-grid gap-2 d-md-block">
-                    <button class="btn btn-success" type="button">Editar</button>
-                    <button class="btn btn-danger" type="button">Eliminar</button>
-                  </div></td>
-                </tr>
-                <tr>
-                  <td>1,015</td>
-                  <td>sodales</td>
-                  <td>ligula</td>
-                 
-                  <td>
-                      <div class="d-grid gap-2 d-md-block">
-                    <button class="btn btn-success" type="button">Editar</button>
-                    <button class="btn btn-danger" type="button">Eliminar</button>
-                  </div></td>
-                </tr>
+                  ";
+                }
+
+                ?>
+                
               </tbody>
             </table>
           </div>
         </main>
       </div>
     </div>
+    <?php
+    if($_POST){
+      extract($_POST);
+        $SQL= "INSERT INTO user ( nombre,pass,	id_empleado) VALUES('{$nombre}', '{$passi}','{$id_emp}')";
+        conexion::execute($SQL);
+        header('Location: AdminGerente.php');
+         
+    }
+    ?>
     <div class="modal fade" id="miModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -316,25 +187,26 @@
                 </button>
               </div>
               <div class="modal-body">
-                  <form>
+                  <form method="POST">
                       <div class="mb-3">
                         <label for="recipient-name" class="col-form-label">Codigo de empleado</label>
-                        <input type="text" class="form-control" id="recipient-name">
+                        <input type="text" class="form-control" id="recipient-name" name="id_emp">
                       </div>
                       <div class="mb-3">
                         <label for="recipient-name" class="col-form-label">Nombre de Usuario</label>
-                        <input type="text" class="form-control" id="recipient-name">
+                        <input type="text" class="form-control" id="recipient-name" name="nombre">
                       </div>
                       <div class="mb-3">
                         <label for="recipient-name" class="col-form-label">Contraseña</label>
-                        <input type="text" class="form-control" id="recipient-name">
+                        <input type="text" class="form-control" id="recipient-name" name="passi">
                       </div>
+                      <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancerlar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                  </div>
                     </form>
                   </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancerlar</button>
-                    <button type="button" class="btn btn-primary">Guardar</button>
-                  </div>
+                  
               </div>
           </div>
       </div>
