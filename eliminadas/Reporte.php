@@ -64,7 +64,15 @@ if (!isset($_SESSION['user'])) {
                 Dashboard
               </a>
             </li>
-            
+            <li class="nav-item">
+              <a class="nav-link active" href="Reporte.php">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file">
+                  <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                  <polyline points="13 2 13 9 20 9"></polyline>
+                </svg>
+                Reportes
+              </a>
+            </li>
 
             <li class="nav-item">
               <a class="nav-link" href="personal.php">
@@ -78,7 +86,7 @@ if (!isset($_SESSION['user'])) {
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="ReportHorario.php">
+              <a class="nav-link" href="ReportHorario.php">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart-2">
                   <line x1="18" y1="20" x2="18" y2="10"></line>
                   <line x1="12" y1="20" x2="12" y2="4"></line>
@@ -87,7 +95,16 @@ if (!isset($_SESSION['user'])) {
                 Reportes de horarios
               </a>
             </li>
-           
+            <li class="nav-item">
+              <a class="nav-link" href="tranporte.php">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers">
+                  <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                  <polyline points="2 17 12 22 22 17"></polyline>
+                  <polyline points="2 12 12 17 22 12"></polyline>
+                </svg>
+                Transporte
+              </a>
+            </li>
           </ul>
 
           <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -128,209 +145,215 @@ if (!isset($_SESSION['user'])) {
           </div>
         </div>
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-          <h1 class="h2">Reportes de horario</h1>
+          <h1 class="h2">Reportes</h1>
+
+        </div>
+
+
+        <div class="d-grid gap-2 d-md-block">
+          <button class="btn btn-primary" type="button">Agregar</button>
         </div>
         <div class="table-responsive">
           <table class="table table-striped table-sm">
             <thead>
               <tr>
-                <th>Fecha</th>
-                <th>Hora de entrada</th>
-                <th>Hora de salida</th>
-                <th>codigo de empleado</th>
+                <th>Id</th>
+                <th>Nombre de usario</th>
+                <th>Puesto</th>
+                <th>Reporte medico</th>
 
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>18/7/2021</td>
-                <td>8:00am</td>
-                <td>4:50PM</td>
-                <td>4093654483</td>
+                <td>1,001</td>
+                <td>Lorem</td>
+                <td>ipsum</td>
+                <td>dolor</td>
                 <td>
                   <div class="d-grid gap-2 d-md-block">
-                    <button class="btn btn-info" type="button">Info</button>
-
+                    <button class="btn btn-success" type="button">Editar</button>
+                    <button class="btn btn-danger" type="button">Eliminar</button>
                   </div>
                 </td>
               </tr>
               <tr>
-                <td>18/7/2021</td>
-                <td>8:02am</td>
-                <td>4:30PM</td>
-                <td>4093654484</td>
+                <td>1,002</td>
+                <td>amet</td>
+                <td>consectetur</td>
+                <td>adipiscing</td>
                 <td>
                   <div class="d-grid gap-2 d-md-block">
-                    <button class="btn btn-info" type="button">Info</button>
-
+                    <button class="btn btn-success" type="button">Editar</button>
+                    <button class="btn btn-danger" type="button">Eliminar</button>
                   </div>
                 </td>
               </tr>
               <tr>
-                <td>18/7/2021</td>
-                <td>8:01am</td>
-                <td>4:59PM</td>
-                <td>4093654473</td>
+                <td>1,003</td>
+                <td>Integer</td>
+                <td>nec</td>
+                <td>odio</td>
                 <td>
                   <div class="d-grid gap-2 d-md-block">
-                    <button class="btn btn-info" type="button">Info</button>
-
+                    <button class="btn btn-success" type="button">Editar</button>
+                    <button class="btn btn-danger" type="button">Eliminar</button>
                   </div>
                 </td>
               </tr>
               <tr>
-                <td>18/7/2021</td>
-                <td>8:00am</td>
-                <td>4:50PM</td>
-                <td>4093654483</td>
+                <td>1,003</td>
+                <td>libero</td>
+                <td>Sed</td>
+                <td>cursus</td>
                 <td>
                   <div class="d-grid gap-2 d-md-block">
-                    <button class="btn btn-info" type="button">Info</button>
-
+                    <button class="btn btn-success" type="button">Editar</button>
+                    <button class="btn btn-danger" type="button">Eliminar</button>
                   </div>
                 </td>
               </tr>
               <tr>
-                <td>18/7/2021</td>
-                <td>8:00am</td>
-                <td>4:50PM</td>
-                <td>4093654483</td>
+                <td>1,004</td>
+                <td>dapibus</td>
+                <td>diam</td>
+                <td>Sed</td>
                 <td>
                   <div class="d-grid gap-2 d-md-block">
-                    <button class="btn btn-info" type="button">Info</button>
-
+                    <button class="btn btn-success" type="button">Editar</button>
+                    <button class="btn btn-danger" type="button">Eliminar</button>
                   </div>
                 </td>
               </tr>
               <tr>
-                <td>18/7/2021</td>
-                <td>8:00am</td>
-                <td>4:50PM</td>
-                <td>4093654483</td>
+                <td>1,005</td>
+                <td>Nulla</td>
+                <td>quis</td>
+                <td>sem</td>
                 <td>
                   <div class="d-grid gap-2 d-md-block">
-                    <button class="btn btn-info" type="button">Info</button>
-
+                    <button class="btn btn-success" type="button">Editar</button>
+                    <button class="btn btn-danger" type="button">Eliminar</button>
                   </div>
                 </td>
               </tr>
               <tr>
-                <td>18/7/2021</td>
-                <td>8:00am</td>
-                <td>4:50PM</td>
-                <td>4093654483</td>
+                <td>1,006</td>
+                <td>nibh</td>
+                <td>elementum</td>
+                <td>imperdiet</td>
                 <td>
                   <div class="d-grid gap-2 d-md-block">
-                    <button class="btn btn-info" type="button">Info</button>
-
+                    <button class="btn btn-success" type="button">Editar</button>
+                    <button class="btn btn-danger" type="button">Eliminar</button>
                   </div>
                 </td>
               </tr>
               <tr>
-                <td>18/7/2021</td>
-                <td>8:00am</td>
-                <td>4:50PM</td>
-                <td>4093654483</td>
+                <td>1,007</td>
+                <td>sagittis</td>
+                <td>ipsum</td>
+                <td>Praesent</td>
                 <td>
                   <div class="d-grid gap-2 d-md-block">
-                    <button class="btn btn-info" type="button">Info</button>
-
+                    <button class="btn btn-success" type="button">Editar</button>
+                    <button class="btn btn-danger" type="button">Eliminar</button>
                   </div>
                 </td>
               </tr>
               <tr>
-                <td>18/7/2021</td>
-                <td>8:00am</td>
-                <td>4:50PM</td>
-                <td>4093654483</td>
+                <td>1,008</td>
+                <td>Fusce</td>
+                <td>nec</td>
+                <td>tellus</td>
                 <td>
                   <div class="d-grid gap-2 d-md-block">
-                    <button class="btn btn-info" type="button">Info</button>
-
+                    <button class="btn btn-success" type="button">Editar</button>
+                    <button class="btn btn-danger" type="button">Eliminar</button>
                   </div>
                 </td>
               </tr>
               <tr>
-                <td>18/7/2021</td>
-                <td>8:00am</td>
-                <td>4:50PM</td>
-                <td>4093654483</td>
+                <td>1,009</td>
+                <td>augue</td>
+                <td>semper</td>
+                <td>porta</td>
                 <td>
                   <div class="d-grid gap-2 d-md-block">
-                    <button class="btn btn-info" type="button">Info</button>
-
+                    <button class="btn btn-success" type="button">Editar</button>
+                    <button class="btn btn-danger" type="button">Eliminar</button>
                   </div>
                 </td>
               </tr>
               <tr>
-                <td>18/7/2021</td>
-                <td>8:00am</td>
-                <td>4:50PM</td>
-                <td>4093654483</td>
+                <td>1,010</td>
+                <td>massa</td>
+                <td>Vestibulum</td>
+                <td>lacinia</td>
                 <td>
                   <div class="d-grid gap-2 d-md-block">
-                    <button class="btn btn-info" type="button">Info</button>
-
+                    <button class="btn btn-success" type="button">Editar</button>
+                    <button class="btn btn-danger" type="button">Eliminar</button>
                   </div>
                 </td>
               </tr>
               <tr>
-                <td>18/7/2021</td>
-                <td>8:00am</td>
-                <td>4:50PM</td>
-                <td>4093654483</td>
+                <td>1,011</td>
+                <td>eget</td>
+                <td>nulla</td>
+                <td>Class</td>
                 <td>
                   <div class="d-grid gap-2 d-md-block">
-                    <button class="btn btn-info" type="button">Info</button>
-
+                    <button class="btn btn-success" type="button">Editar</button>
+                    <button class="btn btn-danger" type="button">Eliminar</button>
                   </div>
                 </td>
               </tr>
               <tr>
-                <td>18/7/2021</td>
-                <td>8:00am</td>
-                <td>4:50PM</td>
-                <td>4093654483</td>
+                <td>1,012</td>
+                <td>taciti</td>
+                <td>sociosqu</td>
+                <td>ad</td>
                 <td>
                   <div class="d-grid gap-2 d-md-block">
-                    <button class="btn btn-info" type="button">Info</button>
-
+                    <button class="btn btn-success" type="button">Editar</button>
+                    <button class="btn btn-danger" type="button">Eliminar</button>
                   </div>
                 </td>
               </tr>
               <tr>
-                <td>18/7/2021</td>
-                <td>8:00am</td>
-                <td>4:50PM</td>
-                <td>4093654483</td>
+                <td>1,013</td>
+                <td>torquent</td>
+                <td>per</td>
+                <td>conubia</td>
                 <td>
                   <div class="d-grid gap-2 d-md-block">
-                    <button class="btn btn-info" type="button">Info</button>
-
+                    <button class="btn btn-success" type="button">Editar</button>
+                    <button class="btn btn-danger" type="button">Eliminar</button>
                   </div>
                 </td>
               </tr>
               <tr>
-                <td>18/7/2021</td>
-                <td>8:00am</td>
-                <td>4:50PM</td>
-                <td>4093654483</td>
+                <td>1,014</td>
+                <td>per</td>
+                <td>inceptos</td>
+                <td>himenaeos</td>
                 <td>
                   <div class="d-grid gap-2 d-md-block">
-                    <button class="btn btn-info" type="button">Info</button>
-
+                    <button class="btn btn-success" type="button">Editar</button>
+                    <button class="btn btn-danger" type="button">Eliminar</button>
                   </div>
                 </td>
               </tr>
               <tr>
-                <td>18/7/2021</td>
-                <td>8:00am</td>
-                <td>4:50PM</td>
-                <td>4093654483</td>
+                <td>1,015</td>
+                <td>sodales</td>
+                <td>ligula</td>
+                <td>in</td>
                 <td>
                   <div class="d-grid gap-2 d-md-block">
-                    <button class="btn btn-info" type="button">Info</button>
-
+                    <button class="btn btn-success" type="button">Editar</button>
+                    <button class="btn btn-danger" type="button">Eliminar</button>
                   </div>
                 </td>
               </tr>
@@ -345,9 +368,7 @@ if (!isset($_SESSION['user'])) {
     ================================================== -->
   <!-- Placed at the end of the document so the pages load faster -->
   <script src="./Dashboard Template for Bootstrap_files/jquery-3.2.1.slim.min.js"></script>
-  <script>
-    window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')
-  </script>
+
   <script src="./Dashboard Template for Bootstrap_files/popper.min.js"></script>
   <script src="./Dashboard Template for Bootstrap_files/bootstrap.min.js"></script>
 
@@ -357,7 +378,37 @@ if (!isset($_SESSION['user'])) {
     feather.replace()
   </script>
 
-
+  <!-- Graphs -->
+  <script src="./Dashboard Template for Bootstrap_files/Chart.min.js"></script>
+  <script>
+    var ctx = document.getElementById("myChart");
+    var myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        datasets: [{
+          data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
+          lineTension: 0,
+          backgroundColor: 'transparent',
+          borderColor: '#007bff',
+          borderWidth: 4,
+          pointBackgroundColor: '#007bff'
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: false
+            }
+          }]
+        },
+        legend: {
+          display: false,
+        }
+      }
+    });
+  </script>
 
 
 </body>

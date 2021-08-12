@@ -1,6 +1,23 @@
+<?php
+session_start();
+include('conexion/conexion.php');
+include('conexion/config.php');
+if (!isset($_SESSION['user'])) {
+  header("Location: ./loing/login.php");
+}
+if ($_POST) {
+  extract($_POST);
+
+  $SQL = "INSERT INTO empleados( nombre, apellido, cedula_pasaporte, huella_digital,fecha_nacimiento, pais_nacimiento,fecha_entrada,correo,telefono, direccion1, direccion2, posicion, estado) VALUES('{$nombre}', '{$apellido}','{$cedula}', '{$huella}','{$fechan}', '{$pais}','{$fechae}', '{$correo}','{$telefono}', '{$direccion1}','{$direccion2}', '{$puesto}','{$estado}')";
+  conexion::execute($SQL);
+  unset($_POST);
+  // unset($_POST);
+  $_POST = [];
+  header('Location: personal.php');
+}
+?>
 <!DOCTYPE html>
-<!-- saved from url=(0053)https://getbootstrap.com/docs/4.0/examples/dashboard/ -->
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -20,33 +37,6 @@
 
   <!-- Custom styles for this template -->
   <link href="./Dashboard Template for Bootstrap_files/dashboard.css" rel="stylesheet">
-  <style type="text/css">
-    /* Chart.js */
-    @-webkit-keyframes chartjs-render-animation {
-      from {
-        opacity: 0.99
-      }
-
-      to {
-        opacity: 1
-      }
-    }
-
-    @keyframes chartjs-render-animation {
-      from {
-        opacity: 0.99
-      }
-
-      to {
-        opacity: 1
-      }
-    }
-
-    .chartjs-render-monitor {
-      -webkit-animation: chartjs-render-animation 0.001s;
-      animation: chartjs-render-animation 0.001s;
-    }
-  </style>
 </head>
 
 <body data-new-gr-c-s-check-loaded="14.1022.0" data-gr-ext-installed="">
@@ -58,7 +48,7 @@
     <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
     <ul class="navbar-nav px-3">
       <li class="nav-item text-nowrap">
-        <a class="nav-link" href="login.php">Salir</a>
+        <a class='nav-link' href='./login/logout.php'>Salir</a>
       </li>
     </ul>
   </nav>
@@ -88,15 +78,7 @@
             </li>
 
 
-            <li class="nav-item">
-              <a class="nav-link " href="Reporte.php">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file">
-                  <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
-                  <polyline points="13 2 13 9 20 9"></polyline>
-                </svg>
-                Reportes
-              </a>
-            </li>
+
             <li class="nav-item">
               <a class="nav-link active" href="personal.php">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users">
@@ -105,7 +87,7 @@
                   <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
                   <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                 </svg>
-                Personal
+                Empleados
               </a>
             </li>
             <li class="nav-item">
@@ -118,16 +100,7 @@
                 Reportes de horarios
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="tranporte.php">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers">
-                  <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-                  <polyline points="2 17 12 22 22 17"></polyline>
-                  <polyline points="2 12 12 17 22 12"></polyline>
-                </svg>
-                Transporte
-              </a>
-            </li>
+
           </ul>
 
           <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -168,35 +141,17 @@
           </div>
         </div>
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-          <h1 class="h2">Registro de personal</h1>
-          <div class="btn-toolbar mb-2 mb-md-0">
-            <div class="btn-group mr-2">
-              <button class="btn btn-sm btn-outline-secondary">Compartir</button>
-              <button class="btn btn-sm btn-outline-secondary">Exportar</button>
-            </div>
-            <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                <line x1="16" y1="2" x2="16" y2="6"></line>
-                <line x1="8" y1="2" x2="8" y2="6"></line>
-                <line x1="3" y1="10" x2="21" y2="10"></line>
-              </svg>
-              Calendario
-            </button>
-          </div>
+          <h1 class="h2">Registro de empleados</h1>
+
         </div>
 
         <?php
-        ob_start();
-        include('conexion/conexion.php');
-        include('conexion/config.php');
-
         if (isset($_GET['del'])) {
           $delete = "DELETE FROM empleados WHERE id_empleado={$_GET['del']}";
           conexion::execute($delete);
         }
         ?>
-        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#miModal">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#miModal">
           Agregar
         </button>
         <div class="table-responsive">
@@ -216,31 +171,29 @@
 
               $sql = "SELECT * FROM empleados";
               $data = conexion::execute($sql);
-              foreach ($data as $dato) {
-                echo "<tr>";
-                echo "
-                  <td>{$dato['id_empleado']}</td>
-                  <td>{$dato['nombre']}</td>
-                  <td>{$dato['posicion']}</td>";
-                if ($dato['estado'] != 0) {
-                  echo "<td  class='table-success'>Activo</td>";
-                } else {
-                  echo "<td class='table-danger'>inactivo</td>";
-                }
-                echo "
-                  
+              foreach ($data as $dato) :
+              ?>
+                <tr>
+
+                  <td><?= $dato['id_empleado'] ?></td>
+                  <td><?= $dato['nombre'] ?></td>
+                  <td><?= $dato['posicion'] ?></td>
+                  <?php if ($dato['estado'] != 0) : ?>
+                    <td class='table-success'>Activo</td>
+                  <?php else : ?>
+                    <td class='table-danger'>Inactivo</td>
+                  <?php endif; ?>
+
+
                   <td>
                     <div class='d-grid gap-2 d-md-block'>
-                    <a href='editar.php?edit={$dato['id_empleado']}'class='btn btn-success' >Editar</a>
-                    <a href='personal.php?del={$dato['id_empleado']}'class='btn btn-danger'>eliminar</a>
-                      </div>
+                      <a href='editar.php?edit=<?= $dato['id_empleado'] ?>' class='btn btn-success'>Editar</a>
+                      <a href='personal.php?del=<?= $dato['id_empleado'] ?>' class='btn btn-danger'>Eliminar</a>
+                    </div>
                   </td>
-                  
-                </tr>
-                  ";
-              }
 
-              ?>
+                </tr>
+              <?php endforeach; ?>
 
 
 
@@ -250,85 +203,80 @@
       </main>
     </div>
   </div>
-  <?php
-  if ($_POST) {
-    extract($_POST);
 
-    $SQL = "INSERT INTO empleados( nombre, apellido, cedula_pasaporte, huella_digital,fecha_nacimiento, pais_nacimiento,fecha_entrada,correo,telefono, direccion1, direccion2, posicion, estado) VALUES('{$nombre}', '{$apellido}','{$cedula}', '{$huella}','{$fechan}', '{$pais}','{$fechae}', '{$correo}','{$telefono}', '{$direccion1}','{$direccion2}', '{$puesto}','{$estado}')";
-    conexion::execute($SQL);
-    header('Location: personal.php');
-  }
-  ?>
   <div class="modal fade" id="miModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
 
-          <h4 class="modal-title">Usuario</h4>
+          <h4 class="modal-title">Empleados</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <form method="POST">
+          <form class='row row-cols-2' method="POST" id='editar'>
 
-            <div class="mb-3">
+            <div class="mb-3 col-6">
               <label for="recipient-name" class="col-form-label">Cedula o pasaporte</label>
-              <input type="text" class="form-control" name="cedula">
+              <input type="text" class="form-control" name="cedula" required>
             </div>
-            <div class="mb-3">
+            <div class="mb-3 col-6">
               <label for="recipient-name" class="col-form-label">Nombre</label>
-              <input type="text" class="form-control" name="nombre">
+              <input type="text" class="form-control" name="nombre" required>
             </div>
-            <div class="mb-3">
+            <div class="mb-3 col-6">
               <label for="recipient-name" class="col-form-label">Apellido</label>
-              <input type="text" class="form-control" name="apellido">
+              <input type="text" class="form-control" name="apellido" required>
             </div>
-            <div class="mb-3">
+            <div class="mb-3 col-6">
               <label for="recipient-name" class="col-form-label">Fecha de nacimiento</label>
-              <input type="date" class="form-control" name="fechan">
+              <input type="date" class="form-control" name="fechan" required>
             </div>
-            <div class="mb-3">
+            <div class="mb-3 col-6">
               <label for="recipient-name" class="col-form-label">Pais</label>
-              <input type="text" class="form-control" name="pais">
+              <input type="text" class="form-control" name="pais" required>
             </div>
-            <div class="mb-3">
+            <div class="mb-3 col-6 d-none">
               <label for="recipient-name" class="col-form-label">Huella digital</label>
               <input type="text" class="form-control" name="huella">
             </div>
-            <div class="mb-3">
+            <div class="mb-3 col-6">
               <label for="recipient-name" class="col-form-label">Correo</label>
               <input type="text" class="form-control" name="correo">
             </div>
-            <div class="mb-3">
+            <div class="mb-3 col-6">
               <label for="recipient-name" class="col-form-label">Telefono</label>
               <input type="text" class="form-control" name="telefono">
             </div>
-            <div class="mb-3">
+            <div class="mb-3 col-6">
               <label for="recipient-name" class="col-form-label">Direcccion #1</label>
-              <input type="text" class="form-control" name="direccion1">
+              <input type="text" class="form-control" name="direccion1" required>
             </div>
-            <div class="mb-3">
+            <div class="mb-3 col-6">
               <label for="recipient-name" class="col-form-label">Direcccion #2</label>
               <input type="text" class="form-control" name="direccion2">
             </div>
-            <div class="mb-3">
+            <div class="mb-3 col-6">
               <label for="recipient-name" class="col-form-label">Puesto</label>
-              <input type="text" class="form-control" name="puesto">
+              <input type="text" class="form-control" name="puesto" required>
             </div>
-            <div class="mb-3">
+            <div class="mb-3 col-6">
               <label for="recipient-name" class="col-form-label">Estado</label>
-              <input type="text" class="form-control" name="estado">
+              <select name="estado" class='custom-select'>
+                <option value="1">Activo</option>
+                <option value="0">Inactivo</option>
+              </select>
             </div>
-            <div class="mb-3">
+            <div class="mb-3 col-6">
               <label for="recipient-name" class="col-form-label">Fecha de entrada</label>
-              <input type="date" class="form-control" name="fechae">
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancerlar</button>
-              <button type="submit" class="btn btn-primary">Guardar</button>
+              <input type="date" class="form-control" name="fechae" required>
             </div>
           </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary" form="editar">Guardar</button>
         </div>
 
       </div>
@@ -338,16 +286,23 @@
   <!-- Bootstrap core JavaScript
     ================================================== -->
   <!-- Placed at the end of the document so the pages load faster -->
-  <script src="./Dashboard Template for Bootstrap_files/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script>
-    window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')
-  </script>
+  <script src="./Dashboard Template for Bootstrap_files/jquery-3.2.1.slim.min.js"></script>
+
   <script src="./Dashboard Template for Bootstrap_files/popper.min.js"></script>
   <script src="./Dashboard Template for Bootstrap_files/bootstrap.min.js"></script>
   <!-- Icons -->
   <script src="./Dashboard Template for Bootstrap_files/feather.min.js"></script>
   <script>
     feather.replace()
+
+    function checkFormValidity(e) {
+      if (!e.target.checkValidity()) {
+        e.preventDefault()
+        e.stopPropagation()
+      }
+    }
+
+    document.querySelector('#editar').addEventListener('submit', checkFormValidity);
   </script>
 
 

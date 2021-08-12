@@ -13,7 +13,7 @@ const setFecha = () => {
   let hora = `${withZero(_date.getHours())}:${withZero(
     _date.getMinutes()
   )}:${withZero(_date.getSeconds())}`;
-  divFecha.append(`${hora || ""} ~ ${fecha || ""}`);
+  divFecha.append(`${hora || ""} · ${fecha || ""}`);
 };
 
 function withZero(number) {
