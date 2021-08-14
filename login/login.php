@@ -23,8 +23,7 @@
 
 <body class="text-center" data-new-gr-c-s-check-loaded="14.1022.0" data-gr-ext-installed="">
   <?php
-  include('../conexion/conexion.php');
-  include('../conexion/config.php');
+  include_once('../conexion/conexion.php');
   session_start();
   $failToLoggin = false;
   if ($_POST) {

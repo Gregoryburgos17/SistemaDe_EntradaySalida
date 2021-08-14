@@ -1,5 +1,4 @@
 <?php
-require_once 'conexion/config.php';
 require_once 'conexion/conexion.php';
 
 date_default_timezone_set('America/Santo_Domingo');

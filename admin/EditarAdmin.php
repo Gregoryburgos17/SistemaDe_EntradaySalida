@@ -1,7 +1,6 @@
 <?php
 ob_start();
-include('../conexion/conexion.php');
-include('../conexion/config.php');
+include_once('../conexion/conexion.php');
 
 
 if (isset($_GET['edit'])) {

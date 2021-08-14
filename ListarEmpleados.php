@@ -1,5 +1,4 @@
 <?php
-require_once 'conexion/config.php';
 require_once 'conexion/conexion.php';
 $query = <<<INPUT
 SELECT * FROM empleados;

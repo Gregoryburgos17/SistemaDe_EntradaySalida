@@ -4,8 +4,7 @@ if (!isset($_SESSION['user'])) {
   header("Location: ./login/login.php");
 }
 
-include('conexion/conexion.php');
-include('conexion/config.php');
+include_once('conexion/conexion.php');
 
 
 if (isset($_GET['edit'])) {

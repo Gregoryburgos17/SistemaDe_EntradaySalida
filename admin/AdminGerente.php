@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <?php
-include("../conexion/conexion.php");
-include("../conexion/config.php");
+include_once("../conexion/conexion.php");
 if(isset($_GET['del'])){
   $delete="DELETE FROM user WHERE id_usuario={$_GET['del']}";
   conexion::execute($delete);

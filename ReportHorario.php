@@ -3,6 +3,15 @@ session_start();
 if (!isset($_SESSION['user'])) {
   header("Location: ./login/login.php");
 }
+
+include_once 'conexion/conexion.php';
+$sql = "SELECT * FROM entrada_salida ES INNER JOIN empleados E ON ES.id_empleado = E.id_empleado";
+$data = conexion::execute($sql);
+$result = conexion::execute("SELECT * FROM empleados");
+$empleados = [];
+foreach ($result as $emp) {
+  $empleados[$emp['id_empleado']] = $emp;
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -32,7 +41,7 @@ if (!isset($_SESSION['user'])) {
     <a href="#" class="navbar-brand">
       <img src="ATLAS.ico" height="70" alt="ATLAS"></a>
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="">Atlas</a>
-    <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+    <input class="form-control form-control-dark w-100" type="text" id='busqueda' placeholder="Search" aria-label="Search">
     <ul class="navbar-nav px-3">
       <li class="nav-item text-nowrap">
         <a class='nav-link' href='./login/logout.php'>Salir</a>
@@ -64,7 +73,7 @@ if (!isset($_SESSION['user'])) {
                 Dashboard
               </a>
             </li>
-            
+
 
             <li class="nav-item">
               <a class="nav-link" href="personal.php">
@@ -87,7 +96,7 @@ if (!isset($_SESSION['user'])) {
                 Reportes de horarios
               </a>
             </li>
-           
+
           </ul>
 
           <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -137,203 +146,24 @@ if (!isset($_SESSION['user'])) {
                 <th>Fecha</th>
                 <th>Hora de entrada</th>
                 <th>Hora de salida</th>
-                <th>codigo de empleado</th>
-
+                <th>Código de empleado</th>
+                <th>Empleado</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>18/7/2021</td>
-                <td>8:00am</td>
-                <td>4:50PM</td>
-                <td>4093654483</td>
-                <td>
-                  <div class="d-grid gap-2 d-md-block">
-                    <button class="btn btn-info" type="button">Info</button>
-
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>18/7/2021</td>
-                <td>8:02am</td>
-                <td>4:30PM</td>
-                <td>4093654484</td>
-                <td>
-                  <div class="d-grid gap-2 d-md-block">
-                    <button class="btn btn-info" type="button">Info</button>
-
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>18/7/2021</td>
-                <td>8:01am</td>
-                <td>4:59PM</td>
-                <td>4093654473</td>
-                <td>
-                  <div class="d-grid gap-2 d-md-block">
-                    <button class="btn btn-info" type="button">Info</button>
-
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>18/7/2021</td>
-                <td>8:00am</td>
-                <td>4:50PM</td>
-                <td>4093654483</td>
-                <td>
-                  <div class="d-grid gap-2 d-md-block">
-                    <button class="btn btn-info" type="button">Info</button>
-
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>18/7/2021</td>
-                <td>8:00am</td>
-                <td>4:50PM</td>
-                <td>4093654483</td>
-                <td>
-                  <div class="d-grid gap-2 d-md-block">
-                    <button class="btn btn-info" type="button">Info</button>
-
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>18/7/2021</td>
-                <td>8:00am</td>
-                <td>4:50PM</td>
-                <td>4093654483</td>
-                <td>
-                  <div class="d-grid gap-2 d-md-block">
-                    <button class="btn btn-info" type="button">Info</button>
-
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>18/7/2021</td>
-                <td>8:00am</td>
-                <td>4:50PM</td>
-                <td>4093654483</td>
-                <td>
-                  <div class="d-grid gap-2 d-md-block">
-                    <button class="btn btn-info" type="button">Info</button>
-
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>18/7/2021</td>
-                <td>8:00am</td>
-                <td>4:50PM</td>
-                <td>4093654483</td>
-                <td>
-                  <div class="d-grid gap-2 d-md-block">
-                    <button class="btn btn-info" type="button">Info</button>
-
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>18/7/2021</td>
-                <td>8:00am</td>
-                <td>4:50PM</td>
-                <td>4093654483</td>
-                <td>
-                  <div class="d-grid gap-2 d-md-block">
-                    <button class="btn btn-info" type="button">Info</button>
-
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>18/7/2021</td>
-                <td>8:00am</td>
-                <td>4:50PM</td>
-                <td>4093654483</td>
-                <td>
-                  <div class="d-grid gap-2 d-md-block">
-                    <button class="btn btn-info" type="button">Info</button>
-
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>18/7/2021</td>
-                <td>8:00am</td>
-                <td>4:50PM</td>
-                <td>4093654483</td>
-                <td>
-                  <div class="d-grid gap-2 d-md-block">
-                    <button class="btn btn-info" type="button">Info</button>
-
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>18/7/2021</td>
-                <td>8:00am</td>
-                <td>4:50PM</td>
-                <td>4093654483</td>
-                <td>
-                  <div class="d-grid gap-2 d-md-block">
-                    <button class="btn btn-info" type="button">Info</button>
-
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>18/7/2021</td>
-                <td>8:00am</td>
-                <td>4:50PM</td>
-                <td>4093654483</td>
-                <td>
-                  <div class="d-grid gap-2 d-md-block">
-                    <button class="btn btn-info" type="button">Info</button>
-
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>18/7/2021</td>
-                <td>8:00am</td>
-                <td>4:50PM</td>
-                <td>4093654483</td>
-                <td>
-                  <div class="d-grid gap-2 d-md-block">
-                    <button class="btn btn-info" type="button">Info</button>
-
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>18/7/2021</td>
-                <td>8:00am</td>
-                <td>4:50PM</td>
-                <td>4093654483</td>
-                <td>
-                  <div class="d-grid gap-2 d-md-block">
-                    <button class="btn btn-info" type="button">Info</button>
-
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>18/7/2021</td>
-                <td>8:00am</td>
-                <td>4:50PM</td>
-                <td>4093654483</td>
-                <td>
-                  <div class="d-grid gap-2 d-md-block">
-                    <button class="btn btn-info" type="button">Info</button>
-
-                  </div>
-                </td>
-              </tr>
+              <?php
+              foreach ($data as $dato) :
+                $fecha = new DateTime($dato['fecha']);
+                $empleado = $empleados[$dato['id_empleado']];
+              ?>
+                <tr>
+                  <td><?= $fecha->format('d/m/Y') ?></td>
+                  <td><?= $dato['hora_entrada'] ?></td>
+                  <td><?= isset($dato['hora_salida']) ? $dato['hora_salida'] : ' - ' ?></td>
+                  <td><?= $dato['id_empleado'] ?></td>
+                  <td class='nombre_empleado'><?= $empleado['nombre'] . ' ' . $empleado['apellido'] ?></td>
+                </tr>
+              <?php endforeach; ?>
             </tbody>
           </table>
         </div>
@@ -355,6 +185,13 @@ if (!isset($_SESSION['user'])) {
   <script src="./Dashboard Template for Bootstrap_files/feather.min.js"></script>
   <script>
     feather.replace()
+    let empleados = Array.from($('.nombre_empleado'))
+    
+    $('#busqueda').keyup((e) => {
+      $(empleados).closest('tr').addClass('d-none')
+      let _toShow = empleados.filter((emp)=> emp.innerText.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase()))
+      $(_toShow).closest('tr').removeClass('d-none')
+    })
   </script>
 
 

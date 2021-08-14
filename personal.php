@@ -1,13 +1,11 @@
 <?php
 session_start();
-include('conexion/conexion.php');
-include('conexion/config.php');
+include_once('conexion/conexion.php');
 if (!isset($_SESSION['user'])) {
   header("Location: ./login/login.php");
 }
 if ($_POST) {
   extract($_POST);
-
   $SQL = "INSERT INTO empleados( nombre, apellido, cedula_pasaporte, huella_digital,fecha_nacimiento, pais_nacimiento,fecha_entrada,correo,telefono, direccion1, direccion2, posicion, estado) VALUES('{$nombre}', '{$apellido}','{$cedula}', '{$huella}','{$fechan}', '{$pais}','{$fechae}', '{$correo}','{$telefono}', '{$direccion1}','{$direccion2}', '{$puesto}','{$estado}')";
   conexion::execute($SQL);
   unset($_POST);
@@ -15,6 +13,12 @@ if ($_POST) {
   $_POST = [];
   header('Location: personal.php');
 }
+if (isset($_GET['del'])) {
+  $delete = "DELETE FROM empleados WHERE id_empleado={$_GET['del']}";
+  conexion::execute($delete);
+}
+
+$data = conexion::execute("SELECT * FROM empleados");
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -144,13 +148,6 @@ if ($_POST) {
           <h1 class="h2">Registro de empleados</h1>
 
         </div>
-
-        <?php
-        if (isset($_GET['del'])) {
-          $delete = "DELETE FROM empleados WHERE id_empleado={$_GET['del']}";
-          conexion::execute($delete);
-        }
-        ?>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#miModal">
           Agregar
         </button>
@@ -167,10 +164,6 @@ if ($_POST) {
             </thead>
             <tbody>
               <?php
-
-
-              $sql = "SELECT * FROM empleados";
-              $data = conexion::execute($sql);
               foreach ($data as $dato) :
               ?>
                 <tr>
@@ -194,9 +187,6 @@ if ($_POST) {
 
                 </tr>
               <?php endforeach; ?>
-
-
-
             </tbody>
           </table>
         </div>

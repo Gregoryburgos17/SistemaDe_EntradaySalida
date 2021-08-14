@@ -1,6 +1,5 @@
 <?php
-include('../conexion/conexion.php');
-include('../conexion/config.php');
+include_once('../conexion/conexion.php');
 
 
 
