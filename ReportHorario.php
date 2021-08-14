@@ -143,11 +143,11 @@ foreach ($result as $emp) {
           <table class="table table-striped table-sm">
             <thead>
               <tr>
+                <th>#</th>
+                <th>Empleado</th>
                 <th>Fecha</th>
                 <th>Hora de entrada</th>
                 <th>Hora de salida</th>
-                <th>Código de empleado</th>
-                <th>Empleado</th>
               </tr>
             </thead>
             <tbody>
@@ -157,11 +157,11 @@ foreach ($result as $emp) {
                 $empleado = $empleados[$dato['id_empleado']];
               ?>
                 <tr>
+                  <td><?= $dato['id_empleado'] ?></td>
+                  <td class='nombre_empleado'><?= $empleado['nombre'] . ' ' . $empleado['apellido'] ?></td>
                   <td><?= $fecha->format('d/m/Y') ?></td>
                   <td><?= $dato['hora_entrada'] ?></td>
                   <td><?= isset($dato['hora_salida']) ? $dato['hora_salida'] : ' - ' ?></td>
-                  <td><?= $dato['id_empleado'] ?></td>
-                  <td class='nombre_empleado'><?= $empleado['nombre'] . ' ' . $empleado['apellido'] ?></td>
                 </tr>
               <?php endforeach; ?>
             </tbody>
@@ -186,7 +186,6 @@ foreach ($result as $emp) {
   <script>
     feather.replace()
     let empleados = Array.from($('.nombre_empleado'))
-    
     $('#busqueda').keyup((e) => {
       $(empleados).closest('tr').addClass('d-none')
       let _toShow = empleados.filter((emp)=> emp.innerText.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase()))
