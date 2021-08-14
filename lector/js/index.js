@@ -27,7 +27,7 @@ let empleados = []
  Pedir todas las empleados 
 *****************************************/
 const getEntries = async () => {
-  let result = await fetch('../ListarEmpleados.php')
+  let result = await fetch('ListarEmpleados.php')
   let response = await result.json();
   empleados = response?.respuesta
 }
@@ -48,7 +48,7 @@ button.mousedown(() => {
     const save = async() => {
       let id = Math.round(Math.random() * (empleados?.length - 1))
       id = empleados[id]?.id_empleado
-      let result = await fetch('../RegistrarEntradaSalida.php',{
+      let result = await fetch('RegistrarEntradaSalida.php',{
         method:'POST',
         body: JSON.stringify({id})
       })

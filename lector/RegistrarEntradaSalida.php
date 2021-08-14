@@ -1,5 +1,5 @@
 <?php
-require_once 'conexion/conexion.php';
+require_once '../conexion/conexion.php';
 
 date_default_timezone_set('America/Santo_Domingo');
 $data = json_decode(file_get_contents('php://input'), true);
@@ -21,7 +21,7 @@ $fecha = new DateTime();
 if(count($result) > 0){
 
     $query = <<<INPUT
-    UPDATE entrada_salida SET hora_salida = '{$fecha->format('h:i')}'
+    UPDATE entrada_salida SET hora_salida = '{$fecha->format('H:i:s')}'
     WHERE id_registro = '{$result[0]['id_registro']}'
     INPUT;
     $response = conexion::execute($query);
@@ -32,7 +32,7 @@ if(count($result) > 0){
 }
 
 $query = <<<INPUT
-INSERT INTO entrada_salida VALUES(NULL, '{$fecha->format('Y-m-d')}', '{$fecha->format('h:i')}', NULL,'{$_POST['id']}');
+INSERT INTO entrada_salida VALUES(NULL, '{$fecha->format('Y-m-d')}', '{$fecha->format('H:i:s')}', NULL,'{$_POST['id']}');
 INPUT;
 $response = conexion::execute($query);
 if($response){

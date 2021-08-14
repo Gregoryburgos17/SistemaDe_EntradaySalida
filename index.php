@@ -3,6 +3,7 @@ session_start();
 if (!isset($_SESSION['user'])) {
   header("Location: ./login/login.php");
 }
+include_once('DashboardData.php');
 ?>
 <!DOCTYPE html>
 <!-- saved from url=(0053)https://getbootstrap.com/docs/4.0/examples/dashboard/ -->
@@ -152,7 +153,7 @@ if (!isset($_SESSION['user'])) {
           </div>
         </div>
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-          <h1 class="h2">Grafica de desempeño</h1>
+          <h1 class="h2">Grafica de desempeño para <?php $fecha= new DateTime(); echo $fecha->format('d/m/Y')?></h1>
         </div>
 
         <canvas class="my-4 chartjs-render-monitor" id="myChart" width="1076" height="454" style="display: block; width: 1076px; height: 454px;"></canvas>
@@ -184,9 +185,9 @@ if (!isset($_SESSION['user'])) {
     var myChart = new Chart(ctx, {
       type: 'line',
       data: {
-        labels: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"],
+        labels: [[],"Horas trabajadas", "Horas estimadas de trabajo", "Horas proyectadas de trabajo", []],
         datasets: [{
-          data: [15339, 21345, 18483, 24003, 23489, 24092, 31034],
+          data: [,<?=$tiempo_trabajado_en_horas?>, <?= $horas_a_trabajar?>,<?= $tiempo_proyectado_en_horas?>, ],
           lineTension: 0,
           backgroundColor: 'transparent',
           borderColor: '#007bff',
@@ -198,7 +199,7 @@ if (!isset($_SESSION['user'])) {
         scales: {
           yAxes: [{
             ticks: {
-              beginAtZero: false
+              beginAtZero: true
             }
           }]
         },
