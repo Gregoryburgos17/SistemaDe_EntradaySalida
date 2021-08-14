@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['user'])) {
-  header("Location: ./loing/login.php");
+  header("Location: ./login/login.php");
 }
 
 include('conexion/conexion.php');
@@ -162,55 +162,58 @@ if (isset($_GET['edit'])) {
 
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Cedula o pasaporte</label>
-            <input type="text" class="form-control" name="cedula" value="<?php echo $_POST['cedula_pasaporte'] ?>">
+            <input type="text" class="form-control" name="cedula" value="<?=$_POST['cedula_pasaporte'] ?>">
           </div>
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Nombre</label>
-            <input type="text" class="form-control" name="nombre" value="<?php echo $_POST['nombre'] ?>">
+            <input type="text" class="form-control" name="nombre" value="<?=$_POST['nombre'] ?>">
           </div>
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Apellido</label>
-            <input type="text" class="form-control" name="apellido" value="<?php echo $_POST['apellido'] ?>">
+            <input type="text" class="form-control" name="apellido" value="<?=$_POST['apellido'] ?>">
           </div>
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Fecha de nacimiento</label>
-            <input type="date" class="form-control" name="fechan" value="<?php echo $_POST['fecha_nacimiento'] ?>">
+            <input type="date" class="form-control" name="fechan" value="<?=$_POST['fecha_nacimiento'] ?>">
           </div>
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Pais</label>
-            <input type="text" class="form-control" name="pais" value="<?php echo $_POST['pais_nacimiento'] ?>">
+            <input type="text" class="form-control" name="pais" value="<?=$_POST['pais_nacimiento'] ?>">
           </div>
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Huella digital</label>
-            <input type="text" class="form-control" name="huella" value="<?php echo $_POST['huella_digital'] ?>">
+            <input type="text" class="form-control" name="huella" value="<?=$_POST['huella_digital'] ?>">
           </div>
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Correo</label>
-            <input type="text" class="form-control" name="correo" value="<?php echo $_POST['correo'] ?>">
+            <input type="text" class="form-control" name="correo" value="<?=$_POST['correo'] ?>">
           </div>
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Telefono</label>
-            <input type="text" class="form-control" name="telefono" value="<?php echo $_POST['telefono'] ?>">
+            <input type="text" class="form-control" name="telefono" value="<?=$_POST['telefono'] ?>">
           </div>
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Direcccion #1</label>
-            <input type="text" class="form-control" name="direccion1" value="<?php echo $_POST['direccion1'] ?>">
+            <input type="text" class="form-control" name="direccion1" value="<?=$_POST['direccion1'] ?>">
           </div>
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Direcccion #2</label>
-            <input type="text" class="form-control" name="direccion2" value="<?php echo $_POST['direccion2'] ?>">
+            <input type="text" class="form-control" name="direccion2" value="<?=$_POST['direccion2'] ?>">
           </div>
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Puesto</label>
-            <input type="text" class="form-control" name="puesto" value="<?php echo $_POST['posicion'] ?>">
+            <input type="text" class="form-control" name="puesto" value="<?=$_POST['posicion'] ?>">
           </div>
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Estado</label>
-            <input type="text" class="form-control" name="estado" value="<?php echo $_POST['estado'] ?>">
+            <select name="estado" class='custom-select' value="<?= $_POST['estado'] ?>">
+                <option value="1" <?= $_POST['estado'] == 1 ? 'selected' :'' ?>>Activo</option>
+                <option value="0" <?= $_POST['estado'] == 0 ? 'selected' :'' ?>>Inactivo</option>
+              </select>
           </div>
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Fecha de entrada</label>
-            <input type="date" class="form-control" name="fechae" value="<?php echo $_POST['fecha_entrada'] ?>">
+            <input type="date" class="form-control" name="fechae" value="<?=$_POST['fecha_entrada'] ?>">
           </div>
           <div class="modal-footer">
             <a href="personal.php" class="btn btn-secondary">Cancelar</a>

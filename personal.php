@@ -3,7 +3,7 @@ session_start();
 include('conexion/conexion.php');
 include('conexion/config.php');
 if (!isset($_SESSION['user'])) {
-  header("Location: ./loing/login.php");
+  header("Location: ./login/login.php");
 }
 if ($_POST) {
   extract($_POST);
