@@ -188,7 +188,7 @@ foreach ($result as $emp) {
     let empleados = Array.from($('.nombre_empleado'))
     $('#busqueda').keyup((e) => {
       $(empleados).closest('tr').addClass('d-none')
-      let _toShow = empleados.filter((emp)=> emp.innerText.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase()))
+      let _toShow = empleados.filter((emp)=> emp.innerText.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase().trim()))
       $(_toShow).closest('tr').removeClass('d-none')
     })
   </script>
