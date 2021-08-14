@@ -5,7 +5,7 @@ if (!isset($_SESSION['user'])) {
 }
 
 include_once 'conexion/conexion.php';
-$sql = "SELECT * FROM entrada_salida ES INNER JOIN empleados E ON ES.id_empleado = E.id_empleado";
+$sql = "SELECT * FROM entrada_salida ES INNER JOIN empleados E ON ES.id_empleado = E.id_empleado ORDER BY ES.fecha DESC, ES.hora_entrada DESC, ES.hora_salida DESC";
 $data = conexion::execute($sql);
 $result = conexion::execute("SELECT * FROM empleados");
 $empleados = [];
