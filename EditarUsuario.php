@@ -39,10 +39,7 @@ if (isset($_GET['edit'])) {
   <meta name="author" content="">
   <link rel="icon" href="https://getbootstrap.com/docs/4.0/assets/img/favicons/favicon.ico">
 
-
   <title>Dashboard</title>
-
-  <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/dashboard/">
 
   <!-- Bootstrap core CSS -->
   <link href="./libs/bootstrap.min.css" rel="stylesheet">
