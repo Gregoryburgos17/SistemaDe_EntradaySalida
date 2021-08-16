@@ -1,5 +1,6 @@
 <?php
 include_once('conexion/conexion.php');
+date_default_timezone_set('America/Santo_Domingo');
 $empleados = conexion::query_array('SELECT COUNT(*) cantidad FROM empleados');
 $total_empleados = $empleados[0]['cantidad'];
 date_default_timezone_set('America/Santo_Domingo');
@@ -8,7 +9,8 @@ $horas_a_trabajar = 8 * $total_empleados;
 $fecha = new DateTime();
 $hora_actual = $fecha->format('His');
 $hora_actual = $hora_actual > 170000 ? 170000 : $hora_actual;
-$horas_ = conexion::query_array("SELECT (IFNULL(hora_salida, TIME({$hora_actual})) - hora_entrada) horas_trabajadas, (IFNULL(hora_salida, TIME(170000)) - hora_entrada) horas_proyectadas FROM `entrada_salida` WHERE fecha = CURRENT_DATE");
+$sql = "SELECT (IFNULL(hora_salida, TIME({$hora_actual})) - hora_entrada) horas_trabajadas, (IFNULL(hora_salida, TIME(170000)) - hora_entrada) horas_proyectadas FROM `entrada_salida` WHERE fecha = CURRENT_DATE";
+$horas_ = conexion::query_array($sql);
 
 $tiempo_trabajado_en_horas = 0;
 $tiempo_proyectado_en_horas = 0;
@@ -19,7 +21,7 @@ foreach ($horas_ as $hora){
     $horas = substr($hora_trabajada,0,2);
     $minutos = substr($hora_trabajada,2,2);
     $segundos = substr($hora_trabajada,4,2);
-    $tiempo_trabajado_en_horas += $horas + ($minutos / 60) + ($segundos / 3600);
+    $tiempo_trabajado_en_horas += $horas + ($minutos / 60) + ($segundos / 3600) - ($hora_actual > 120000 ? 1 : 0);
     
     // Calculo de tiempo proyectado
     $hora_proyectada = $hora['horas_proyectadas'];
@@ -27,7 +29,7 @@ foreach ($horas_ as $hora){
     $horas = substr($hora_proyectada,0,2);
     $minutos = substr($hora_proyectada,2,2);
     $segundos = substr($hora_proyectada,4,2);
-    $tiempo_proyectado_en_horas += $horas + ($minutos / 60) + ($segundos / 3600);
+    $tiempo_proyectado_en_horas += $horas + ($minutos / 60) + ($segundos / 3600) - ($hora_actual > 120000 ? 1 : 0);
 }
 
 // echo json_encode(['a_trabajar'=>$horas_a_trabajar, 'trabajadas' => $tiempo_trabajado_en_horas]);

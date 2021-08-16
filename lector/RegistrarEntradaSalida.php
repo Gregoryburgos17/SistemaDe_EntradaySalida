@@ -10,7 +10,7 @@ if(!isset($_POST['id'])){
 
 /*****************************
  * Validar que no se haya registrado la entrada ya
- */
+******************************/
 $fecha = new DateTime();
 
  $query =<<<INPUT
