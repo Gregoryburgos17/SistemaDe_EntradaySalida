@@ -7,27 +7,34 @@ if (!isset($_SESSION['user'])) {
 if (!isset($_SESSION['admin']) || !$_SESSION['admin']) {
   header("Location: index.php");
 }
+if (!isset($_GET['edit'])) {
+  header('Location: usuarios.php');
+}
 
-if (isset($_GET['edit'])) {
-  if ($_POST) {
-    extract($_POST);
-    $update = "UPDATE user SET nombre='{$nombre}',pass='{$pass}',	id_empleado='{$id_em}'";
-    conexion::execute($update);
-    header('Location: AdminGerente.php');
+$sql = "SELECT * FROM user WHERE id_usuario = {$_GET['edit']}";
+$rs = conexion::query_array($sql);
+if (!(count($rs) > 0)) {
+  header('Location: usuarios.php');
+}
+
+$usuario = $rs[0];
+$sql = "SELECT * FROM empleados WHERE id_empleado = {$usuario['id_empleado']}";
+$rs = conexion::query_array($sql);
+if (!(count($rs) > 0)) {
+  header('Location: usuarios.php');
+}
+$empleado = $rs[0];
+
+if ($_POST) {
+  extract($_POST);
+  $update = "UPDATE user SET nombre='{$nombre}', pass='{$pass}', admin=$admin WHERE id_usuario='{$usuario['id_usuario']}'";
+  $response = conexion::execute($update);
+  if ($response) {
+    header('Location: usuarios.php');
   }
 }
-if (isset($_GET['edit'])) {
 
-  $sql = "select * from user  where id_usuario  = {$_GET['edit']}";
-  $rs = conexion::query_array($sql);
-
-  if (count($rs) > 0) {
-    $data = $rs[0];
-    $_POST = $data;
-  }
-}
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -37,52 +44,30 @@ if (isset($_GET['edit'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <link rel="icon" href="https://getbootstrap.com/docs/4.0/assets/img/favicons/favicon.ico">
+  <link rel="icon" href="imgs/ATLAS.ico">
+
 
   <title>Dashboard</title>
+
+
 
   <!-- Bootstrap core CSS -->
   <link href="./libs/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom styles for this template -->
   <link href="./libs/dashboard.css" rel="stylesheet">
-  <style type="text/css">
-    /* Chart.js */
-    @-webkit-keyframes chartjs-render-animation {
-      from {
-        opacity: 0.99
-      }
-
-      to {
-        opacity: 1
-      }
-    }
-
-    @keyframes chartjs-render-animation {
-      from {
-        opacity: 0.99
-      }
-
-      to {
-        opacity: 1
-      }
-    }
-
-    .chartjs-render-monitor {
-      -webkit-animation: chartjs-render-animation 0.001s;
-      animation: chartjs-render-animation 0.001s;
-    }
-  </style>
 </head>
 
 <body data-new-gr-c-s-check-loaded="14.1022.0" data-gr-ext-installed="">
   <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-    <img src="imgs/ATLAS.ico" height="70" alt="ATLAS">
+    <a href="#" class="navbar-brand">
+      <img src="imgs/ATLAS.ico" height="70" alt="ATLAS">
+    </a>
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="">Atlas</a>
     <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
     <ul class="navbar-nav px-3">
       <li class="nav-item text-nowrap">
-        <a class="nav-link" href="./login/logout.php">Salir</a>
+        <a class='nav-link' href='./login/logout.php'>Salir</a>
       </li>
     </ul>
   </nav>
@@ -110,6 +95,9 @@ if (isset($_GET['edit'])) {
                 Dashboard
               </a>
             </li>
+
+
+
             <li class="nav-item">
               <a class="nav-link" href="personal.php">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users">
@@ -122,7 +110,7 @@ if (isset($_GET['edit'])) {
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="ReportHorario.html">
+              <a class="nav-link" href="ReportHorario.php">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart-2">
                   <line x1="18" y1="20" x2="18" y2="10"></line>
                   <line x1="12" y1="20" x2="12" y2="4"></line>
@@ -131,11 +119,24 @@ if (isset($_GET['edit'])) {
                 Reportes de horarios
               </a>
             </li>
+            <?php if ($_SESSION['admin']) : ?>
+              <li class="nav-item">
+                <a class="nav-link active" href="usuarios.php">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                  </svg>
+                  Gestión de usuarios
+                </a>
+              </li>
+            <?php endif; ?>
           </ul>
 
           <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
             <span> Guardar reportes</span>
-            <a class="d-flex align-items-center text-muted" href="index.html">
+            <a class="d-flex align-items-center text-muted" href="index.php">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle">
                 <circle cx="12" cy="12" r="10"></circle>
                 <line x1="12" y1="8" x2="12" y2="16"></line>
@@ -156,22 +157,65 @@ if (isset($_GET['edit'])) {
                 Imprimir
               </a>
             </li>
-
           </ul>
         </div>
       </nav>
 
-      
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+          <h1 class="h2">Editar Usuario</h1>
+        </div>
+        <form method='post'>
+          <div class="form-row">
+            <div class="form-group col-3">
+              <label for="recipient-name" class="col-form-label">Código de empleado</label>
+              <input required readonly type="text" class="form-control" name="id_em" value="<?= $usuario['id_empleado'] ?>">
+            </div>
+            <div class="form-group col-9">
+              <label for="recipient-name" class="col-form-label">Nombre de empleado</label>
+              <input required type="text" class="form-control" readonly value="<?= $empleado['nombre'] . ' ' . $empleado['apellido'] ?>">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Nombre de Usuario</label>
+            <input required type="email" class="form-control" name="nombre" value="<?= $usuario['nombre'] ?>">
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Contraseña</label>
+            <input required type="password" class="form-control" name="pass" value="<?= $usuario['pass'] ?>">
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Rol</label>
+            <select class="custom-select" name="admin">
+              <option value="0" <?= !$usuario['admin'] ? 'selected' :'' ?>>
+                Gerente
+              </option>
+              <option value="1" <?=$usuario['admin'] ? 'selected' :'' ?>>
+                Administrador
+              </option>
+            </select>
+          </div>
+          <div class="modal-footer">
+            <a type="button" href='usuarios.php' class="btn btn-secondary">Cancelar</a>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+        </form>
+    </div>
+  </div>
+  </div>
+  </main>
   </div>
   </div>
 
-
+  </div>
   <!-- Bootstrap core JavaScript
     ================================================== -->
   <!-- Placed at the end of the document so the pages load faster -->
   <script src="./libs/jquery-3.2.1.slim.min.js"></script>
   <script src="./libs/popper.min.js"></script>
   <script src="./libs/bootstrap.min.js"></script>
+
+  <!-- Icons -->
   <script src="./libs/feather.min.js"></script>
   <script>
     feather.replace()

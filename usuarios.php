@@ -13,12 +13,14 @@ if (isset($_GET['del'])) {
   conexion::execute($delete);
 }
 
-$sql = "SELECT * FROM user";
-$usuarios = conexion::execute($sql);
+$sql = "SELECT U.*,CONCAT(E.nombre, ' ', E.apellido) empleado, E.posicion FROM user U JOIN empleados E ON U.id_empleado = E.id_empleado";
+$usuarios = conexion::query_array($sql);
+$sql = "SELECT * FROM empleados WHERE estado = '1'";
+$empleados = conexion::query_array($sql);
 
 if ($_POST) {
   extract($_POST);
-  $SQL = "INSERT INTO user (nombre, pass,	id_empleado) VALUES('{$nombre}', '{$passi}','{$id_emp}')";
+  $SQL = "INSERT INTO user (nombre, pass,	id_empleado, admin) VALUES('{$nombre}', '{$passi}','{$id_emp}', $admin)";
   conexion::execute($SQL);
   header('Location: usuarios.php');
 }
@@ -37,7 +39,7 @@ if ($_POST) {
 
   <title>Dashboard</title>
 
-  
+
 
   <!-- Bootstrap core CSS -->
   <link href="./libs/bootstrap.min.css" rel="stylesheet">
@@ -116,7 +118,7 @@ if ($_POST) {
                     <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
                     <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                   </svg>
-                  Registrar usuarios
+                  Gestión de usuarios
                 </a>
               </li>
             <?php endif; ?>
@@ -151,7 +153,7 @@ if ($_POST) {
 
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-          <h1 class="h2">Registro de empleado</h1>
+          <h1 class="h2">Registro de usuario</h1>
         </div>
         <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#miModal">
           Agregar
@@ -162,24 +164,26 @@ if ($_POST) {
               <tr>
                 <th>Id</th>
                 <th>Usuario</th>
-                <th>Puesto</th>
+                <th>Empleado</th>
+                <th>Posición</th>
               </tr>
             </thead>
             <tbody>
-              <?php foreach ($usuarios as $dato):?>
+              <?php foreach ($usuarios as $dato) : ?>
                 <tr>
-                  <td><?=$dato['id_usuario']?></td>
-                  <td><?=$dato['nombre']?></td>
-                  <td>Gerente</td>
-                  
-                  
+                  <td><?= $dato['id_usuario'] ?></td>
+                  <td><?= $dato['nombre'] ?></td>
+                  <td><?= $dato['empleado'] ?></td>
+                  <td><?= $dato['posicion'] ?></td>
                   <td>
                     <div class='d-grid gap-2 d-md-block'>
-                    <a href='EditarUsuario.php?edit=<?=$dato['id_usuario']?>'class='btn btn-success' >Editar</a>
-                    <a href='usuarios.php?del=<?=$dato['id_usuario']?>'class='btn btn-danger'>Eliminar</a>
-                      </div>
+                      <a href='EditarUsuario.php?edit=<?= $dato['id_usuario'] ?>' class='btn btn-success'>Editar</a>
+                      <?php if (!$dato['admin']) : ?>
+                        <a href='usuarios.php?del=<?= $dato['id_usuario'] ?>' class='btn btn-danger'>Eliminar</a>
+                      <?php endif; ?>
+                    </div>
                   </td>
-                  
+
                 </tr>
               <?php endforeach; ?>
 
@@ -202,7 +206,12 @@ if ($_POST) {
           <form method="POST">
             <div class="mb-3">
               <label for="recipient-name" class="col-form-label">Código de empleado</label>
-              <input type="text" class="form-control" name="id_emp">
+              <input type="text" list="empleados" class="form-control" name="id_emp">
+              <datalist id="empleados">
+                <?php foreach ($empleados as $emp):?>
+                  <option value="<?=$emp['id_empleado']?>"><?=$emp['nombre'] . ' ' . $emp['apellido']?></option>
+                <?php endforeach;?>
+              </datalist>
             </div>
             <div class="mb-3">
               <label for="recipient-name" class="col-form-label">Nombre de Usuario</label>
@@ -211,6 +220,17 @@ if ($_POST) {
             <div class="mb-3">
               <label for="recipient-name" class="col-form-label">Contraseña</label>
               <input type="password" class="form-control" name="passi">
+            </div>
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label">Rol</label>
+              <select class="custom-select" name="admin">
+                  <option value="0">
+                    Gerente
+                  </option>
+                  <option value="1">
+                    Administrador
+                  </option>
+              </select>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
