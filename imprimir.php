@@ -171,7 +171,6 @@ if (!isset($_SESSION['user'])) {
           </div>
         </div>
 
-
         <h2>Registro del dia</h2>
         <div class="table-responsive">
           <table class="table table-striped table-sm">
@@ -185,21 +184,12 @@ if (!isset($_SESSION['user'])) {
                 <td>Registro del mes</td>
                 <td>
                   <div class="d-grid gap-2 d-md-block">
-                    <button class="btn btn-success" type="button">Imprimir</button>
-                    <button class="btn btn-danger" type="button">Eliminar</button>
+                    <a class="btn btn-success" href="print.php" >Imprimir</a>
                   </div>
                 </td>
 
               </tr>
-              <td>
-                <div class="progress">
-                  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%">75%</div>
-                </div>
-              </td>
-              <td>
-                convirtiendo a excel
-              </td>
-
+              
             </tbody>
           </table>
         </div>
@@ -225,35 +215,7 @@ if (!isset($_SESSION['user'])) {
 
   <!-- Graphs -->
   <script src="./Dashboard Template for Bootstrap_files/Chart.min.js"></script>
-  <script>
-    var ctx = document.getElementById("myChart");
-    var myChart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-        datasets: [{
-          data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
-          lineTension: 0,
-          backgroundColor: 'transparent',
-          borderColor: '#007bff',
-          borderWidth: 4,
-          pointBackgroundColor: '#007bff'
-        }]
-      },
-      options: {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: false
-            }
-          }]
-        },
-        legend: {
-          display: false,
-        }
-      }
-    });
-  </script>
+ 
 
 
 </body>
