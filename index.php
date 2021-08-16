@@ -16,7 +16,7 @@ include_once('DashboardData.php');
   <meta name="author" content="">
   <link rel="icon" href="imgs/ATLAS.ico">
 
-  <title>Dashboard</title>
+  <title>Atlas</title>
 
   
 
@@ -224,6 +224,6 @@ include_once('DashboardData.php');
 
 
 </body>
-<grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration>
+
 
 </html>

@@ -24,7 +24,7 @@ foreach ($result as $emp) {
   <meta name="author" content="">
   <link rel="icon" href="imgs/ATLAS.ico">
 
-  <title>Dashboard</title>
+  <title>Atlas</title>
 
   
 
@@ -201,6 +201,6 @@ foreach ($result as $emp) {
 
 
 </body>
-<grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration>
+
 
 </html>

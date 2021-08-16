@@ -51,7 +51,7 @@ if ($_POST) {
   <link rel="icon" href="imgs/ATLAS.ico">
 
 
-  <title>Dashboard</title>
+  <title>Atlas</title>
 
 
 
@@ -241,6 +241,6 @@ if ($_POST) {
 
 
 </body>
-<grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration>
+
 
 </html>

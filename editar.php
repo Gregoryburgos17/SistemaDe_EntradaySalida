@@ -1,29 +1,26 @@
 <?php
 session_start();
+include_once('conexion/conexion.php');
 if (!isset($_SESSION['user'])) {
   header("Location: ./login/login.php");
 }
-
-include_once('conexion/conexion.php');
-
-
-if (isset($_GET['edit'])) {
-  if ($_POST) {
-    extract($_POST);
-    $update = "UPDATE empleados SET nombre='{$nombre}',apellido='{$apellido}',cedula_pasaporte='{$cedula}',huella_digital='{$huella}',fecha_nacimiento='{$fechan}',pais_nacimiento='{$pais}',fecha_entrada='{$fechae}',correo='{$correo}',telefono='{$telefono}',direccion1='{$direccion1}',direccion2='{$direccion2}',posicion='{$puesto}',estado='{$estado}' WHERE  id_empleado={$_GET['edit']}";
-    conexion::execute($update);
-    header('Location: personal.php');
-  }
+if (!isset($_GET['edit'])) {
+  header("Location: personal.php");
 }
-if (isset($_GET['edit'])) {
 
-  $sql = "select * from empleados  where id_empleado  = {$_GET['edit']}";
-  $rs = conexion::query_array($sql);
+if ($_POST) {
+  extract($_POST);
+  $update = "UPDATE empleados SET nombre='{$nombre}',apellido='{$apellido}',cedula_pasaporte='{$cedula}',huella_digital='{$huella}',fecha_nacimiento='{$fechan}',pais_nacimiento='{$pais}',fecha_entrada='{$fechae}',correo='{$correo}',telefono='{$telefono}',direccion1='{$direccion1}',direccion2='{$direccion2}',posicion='{$puesto}',estado='{$estado}' WHERE  id_empleado={$_GET['edit']}";
+  conexion::execute($update);
+  header('Location: personal.php');
+}
 
-  if (count($rs) > 0) {
-    $data = $rs[0];
-    $_POST = $data;
-  }
+$sql = "select * from empleados  where id_empleado  = {$_GET['edit']}";
+$rs = conexion::query_array($sql);
+
+if (count($rs) > 0) {
+  $data = $rs[0];
+  $_POST = $data;
 }
 ?>
 
@@ -39,9 +36,9 @@ if (isset($_GET['edit'])) {
   <link rel="icon" href="imgs/ATLAS.ico">
 
 
-  <title>Dashboard</title>
+  <title>Atlas</title>
 
-  
+
 
   <!-- Bootstrap core CSS -->
   <link href="./libs/bootstrap.min.css" rel="stylesheet">
@@ -90,7 +87,7 @@ if (isset($_GET['edit'])) {
             </li>
 
 
-            
+
             <li class="nav-item">
               <a class="nav-link active" href="personal.php">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users">
@@ -116,11 +113,11 @@ if (isset($_GET['edit'])) {
               <li class="nav-item">
                 <a class="nav-link" href="usuarios.php">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users">
-                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                  <circle cx="9" cy="7" r="4"></circle>
-                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                </svg>
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                  </svg>
                   Gestión de usuarios
                 </a>
               </li>
@@ -157,7 +154,7 @@ if (isset($_GET['edit'])) {
       </nav>
 
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-       
+
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
           <h1 class="h2">Editar empleado</h1>
         </div>
@@ -167,58 +164,58 @@ if (isset($_GET['edit'])) {
 
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Cedula o pasaporte</label>
-            <input type="text" class="form-control number" minlength='11' maxlength='11' name="cedula" value="<?=$_POST['cedula_pasaporte'] ?>">
+            <input type="text" class="form-control number" minlength='11' maxlength='11' name="cedula" value="<?= $_POST['cedula_pasaporte'] ?>">
           </div>
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Nombre</label>
-            <input type="text" class="form-control" name="nombre" value="<?=$_POST['nombre'] ?>">
+            <input type="text" class="form-control" name="nombre" value="<?= $_POST['nombre'] ?>">
           </div>
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Apellido</label>
-            <input type="text" class="form-control" name="apellido" value="<?=$_POST['apellido'] ?>">
+            <input type="text" class="form-control" name="apellido" value="<?= $_POST['apellido'] ?>">
           </div>
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Fecha de nacimiento</label>
-            <input type="date" class="form-control" name="fechan" value="<?=$_POST['fecha_nacimiento'] ?>">
+            <input type="date" class="form-control" name="fechan" value="<?= $_POST['fecha_nacimiento'] ?>">
           </div>
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Pais</label>
-            <input type="text" class="form-control" name="pais" value="<?=$_POST['pais_nacimiento'] ?>">
+            <input type="text" class="form-control" name="pais" value="<?= $_POST['pais_nacimiento'] ?>">
           </div>
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Huella digital</label>
-            <input type="text" class="form-control" name="huella" value="<?=$_POST['huella_digital'] ?>">
+            <input type="text" class="form-control" name="huella" value="<?= $_POST['huella_digital'] ?>">
           </div>
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Correo</label>
-            <input type="email" class="form-control" name="correo" value="<?=$_POST['correo'] ?>">
+            <input type="email" class="form-control" name="correo" value="<?= $_POST['correo'] ?>">
           </div>
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Telefono</label>
-            <input type="text" class="form-control number" minlength="10" maxlength="10" name="telefono" value="<?=$_POST['telefono'] ?>">
+            <input type="text" class="form-control number" minlength="10" maxlength="10" name="telefono" value="<?= $_POST['telefono'] ?>">
           </div>
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Direcccion #1</label>
-            <input type="text" class="form-control" name="direccion1" value="<?=$_POST['direccion1'] ?>">
+            <input type="text" class="form-control" name="direccion1" value="<?= $_POST['direccion1'] ?>">
           </div>
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Direcccion #2</label>
-            <input type="text" class="form-control" name="direccion2" value="<?=$_POST['direccion2'] ?>">
+            <input type="text" class="form-control" name="direccion2" value="<?= $_POST['direccion2'] ?>">
           </div>
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Puesto</label>
-            <input type="text" class="form-control" name="puesto" value="<?=$_POST['posicion'] ?>">
+            <input type="text" class="form-control" name="puesto" value="<?= $_POST['posicion'] ?>">
           </div>
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Estado</label>
             <select name="estado" class='custom-select' value="<?= $_POST['estado'] ?>">
-                <option value="1" <?= $_POST['estado'] == 1 ? 'selected' :'' ?>>Activo</option>
-                <option value="0" <?= $_POST['estado'] == 0 ? 'selected' :'' ?>>Inactivo</option>
-              </select>
+              <option value="1" <?= $_POST['estado'] == 1 ? 'selected' : '' ?>>Activo</option>
+              <option value="0" <?= $_POST['estado'] == 0 ? 'selected' : '' ?>>Inactivo</option>
+            </select>
           </div>
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Fecha de entrada</label>
-            <input type="date" class="form-control" name="fechae" value="<?=$_POST['fecha_entrada'] ?>">
+            <input type="date" class="form-control" name="fechae" value="<?= $_POST['fecha_entrada'] ?>">
           </div>
           <div class="modal-footer">
             <a href="personal.php" class="btn btn-secondary">Cancelar</a>
@@ -251,17 +248,17 @@ if (isset($_GET['edit'])) {
   <script src="./libs/feather.min.js"></script>
   <script>
     feather.replace()
+
     function validateNumber(e) {
       if (isNaN(e.key) && e.key !== 'Backspace') return e.preventDefault()
     }
     $('.number').keydown(validateNumber);
-
   </script>
 
 
 
 
 </body>
-<grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration>
+
 
 </html>

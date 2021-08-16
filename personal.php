@@ -32,7 +32,7 @@ $data = conexion::execute("SELECT * FROM empleados");
   <link rel="icon" href="imgs/ATLAS.ico">
 
 
-  <title>Dashboard</title>
+  <title>Atlas</title>
 
 
 
@@ -304,6 +304,6 @@ $data = conexion::execute("SELECT * FROM empleados");
     $('.number').keydown(validateNumber);
   </script>
 </body>
-<grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration>
+
 
 </html>

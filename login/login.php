@@ -1,5 +1,24 @@
+<?php
+  include_once('../conexion/conexion.php');
+  session_start();
+  $failToLoggin = false;
+  if ($_POST) {
+
+    extract($_POST);
+    $sql = "SELECT nombre, admin FROM `user` WHERE nombre = '{$username}' and pass = '{$pasoclave}'";
+    $fila = conexion::query_array($sql);
+    if (count($fila) != 0) {
+      $_SESSION['user'] = $fila[0]['nombre'];
+      $_SESSION['admin'] = $fila[0]['admin'] == 1;
+    } else {
+      $failToLoggin = true;
+    }
+  }
+  if (isset($_SESSION['user'])) {
+    header("Location: ../index.php");
+  }
+  ?>
 <!DOCTYPE html>
-<!-- saved from url=(0051)https://getbootstrap.com/docs/4.0/examples/sign-in/ -->
 <html lang="en">
 
 <head>
@@ -22,28 +41,6 @@
 </head>
 
 <body class="text-center" data-new-gr-c-s-check-loaded="14.1022.0" data-gr-ext-installed="">
-  <?php
-  include_once('../conexion/conexion.php');
-  session_start();
-  $failToLoggin = false;
-  if ($_POST) {
-
-    extract($_POST);
-    $sql = "SELECT nombre, admin FROM `user` WHERE nombre = '{$username}' and pass = '{$pasoclave}'";
-    $fila = conexion::query_array($sql);
-    if (count($fila) != 0) {
-      $_SESSION['user'] = $fila[0]['nombre'];
-      $_SESSION['admin'] = $fila[0]['admin'] == 1;
-    } else {
-      $failToLoggin = true;
-    }
-  }
-  if (isset($_SESSION['user'])) {
-    header("Location: ../index.php");
-  }
-  ?>
-
-
   <form class="form-signin" action="" method="post">
     <img class="mb-4" src="../imgs/ATLAS.ico" alt="" width="180" height="72">
     <h1 class="h3 mb-3 font-weight-normal">Indetificarse</h1>
@@ -69,6 +66,4 @@
 
 
 </body>
-<grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration>
-
 </html>
