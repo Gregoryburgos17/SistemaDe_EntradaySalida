@@ -167,7 +167,7 @@ if (isset($_GET['edit'])) {
 
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Cedula o pasaporte</label>
-            <input type="text" class="form-control" name="cedula" value="<?=$_POST['cedula_pasaporte'] ?>">
+            <input type="text" class="form-control number" minlength='11' maxlength='11' name="cedula" value="<?=$_POST['cedula_pasaporte'] ?>">
           </div>
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Nombre</label>
@@ -191,11 +191,11 @@ if (isset($_GET['edit'])) {
           </div>
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Correo</label>
-            <input type="text" class="form-control" name="correo" value="<?=$_POST['correo'] ?>">
+            <input type="email" class="form-control" name="correo" value="<?=$_POST['correo'] ?>">
           </div>
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Telefono</label>
-            <input type="text" class="form-control" name="telefono" value="<?=$_POST['telefono'] ?>">
+            <input type="text" class="form-control number" minlength="10" maxlength="10" name="telefono" value="<?=$_POST['telefono'] ?>">
           </div>
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Direcccion #1</label>
@@ -251,6 +251,11 @@ if (isset($_GET['edit'])) {
   <script src="./libs/feather.min.js"></script>
   <script>
     feather.replace()
+    function validateNumber(e) {
+      if (isNaN(e.key) && e.key !== 'Backspace') return e.preventDefault()
+    }
+    $('.number').keydown(validateNumber);
+
   </script>
 
 

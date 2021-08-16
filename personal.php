@@ -34,7 +34,7 @@ $data = conexion::execute("SELECT * FROM empleados");
 
   <title>Dashboard</title>
 
-  
+
 
   <!-- Bootstrap core CSS -->
   <link href="./libs/bootstrap.min.css" rel="stylesheet">
@@ -212,7 +212,7 @@ $data = conexion::execute("SELECT * FROM empleados");
 
             <div class="mb-3 col-6">
               <label for="recipient-name" class="col-form-label">Cedula o pasaporte</label>
-              <input type="text" class="form-control" name="cedula" required>
+              <input type="text" maxlength="11" class="form-control number" name="cedula" required>
             </div>
             <div class="mb-3 col-6">
               <label for="recipient-name" class="col-form-label">Nombre</label>
@@ -236,11 +236,11 @@ $data = conexion::execute("SELECT * FROM empleados");
             </div>
             <div class="mb-3 col-6">
               <label for="recipient-name" class="col-form-label">Correo</label>
-              <input type="text" class="form-control" name="correo">
+              <input type="email" class="form-control" name="correo">
             </div>
             <div class="mb-3 col-6">
               <label for="recipient-name" class="col-form-label">Telefono</label>
-              <input type="text" class="form-control" name="telefono">
+              <input type="text" maxlength="10" class="form-control number" name="telefono">
             </div>
             <div class="mb-3 col-6">
               <label for="recipient-name" class="col-form-label">Direcccion #1</label>
@@ -263,7 +263,8 @@ $data = conexion::execute("SELECT * FROM empleados");
             </div>
             <div class="mb-3 col-6">
               <label for="recipient-name" class="col-form-label">Fecha de entrada</label>
-              <input type="date" class="form-control" name="fechae" required>
+              <input type="date" class="form-control" name="fechae" value="<?php $fecha = new DateTime();
+                                                                            echo $fecha->format('Y-m-d'); ?>" required>
             </div>
           </form>
         </div>
@@ -295,12 +296,13 @@ $data = conexion::execute("SELECT * FROM empleados");
       }
     }
 
+    function validateNumber(e) {
+      if (isNaN(e.key) && e.key !== 'Backspace') return e.preventDefault()
+    }
+
     document.querySelector('#editar').addEventListener('submit', checkFormValidity);
+    $('.number').keydown(validateNumber);
   </script>
-
-
-
-
 </body>
 <grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration>
 
