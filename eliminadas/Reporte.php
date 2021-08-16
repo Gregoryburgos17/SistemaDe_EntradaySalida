@@ -13,7 +13,7 @@ if (!isset($_SESSION['user'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <link rel="icon" href="ATLAS.ico">
+  <link rel="icon" href="imgs/ATLAS.ico">
 
   <title>Dashboard</title>
 
@@ -30,7 +30,7 @@ if (!isset($_SESSION['user'])) {
 <body data-new-gr-c-s-check-loaded="14.1022.0" data-gr-ext-installed="">
   <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
     <a href="#" class="navbar-brand">
-      <img src="ATLAS.ico" height="70" alt="ATLAS"></a>
+      <img src="imgs/ATLAS.ico" height="70" alt="ATLAS"></a>
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="">Atlas</a>
     <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
     <ul class="navbar-nav px-3">
@@ -136,14 +136,7 @@ if (!isset($_SESSION['user'])) {
       </nav>
 
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-        <div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-          <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-            <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
-          </div>
-          <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-            <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
-          </div>
-        </div>
+       
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
           <h1 class="h2">Reportes</h1>
 

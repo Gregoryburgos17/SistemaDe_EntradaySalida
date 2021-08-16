@@ -15,7 +15,7 @@ include_once('DashboardData.php');
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <link rel="icon" href="ATLAS.ico">
+  <link rel="icon" href="imgs/ATLAS.ico">
 
   <title>Dashboard</title>
 
@@ -58,7 +58,7 @@ include_once('DashboardData.php');
 <body data-new-gr-c-s-check-loaded="14.1022.0" data-gr-ext-installed="">
   <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
     <a href="#" class="navbar-brand">
-      <img src="ATLAS.ico" height="70" alt="ATLAS"></a>
+      <img src="imgs/ATLAS.ico" height="70" alt="ATLAS"></a>
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="">Atlas</a>
     <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
     <ul class="navbar-nav px-3">
@@ -112,7 +112,20 @@ include_once('DashboardData.php');
                 Reportes de horarios
               </a>
             </li>
-           
+            <?php if ($_SESSION['admin']) : ?>
+              <li class="nav-item">
+                <a class="nav-link" href="usuarios.php">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+                  Registrar usuarios
+                </a>
+              </li>
+            <?php endif; ?>
+
           </ul>
 
           <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -153,7 +166,8 @@ include_once('DashboardData.php');
           </div>
         </div>
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-          <h1 class="h2">Grafica de desempeño para <?php $fecha= new DateTime(); echo $fecha->format('d/m/Y')?></h1>
+          <h1 class="h2">Grafica de desempeño para <?php $fecha = new DateTime();
+                                                    echo $fecha->format('d/m/Y') ?></h1>
         </div>
 
         <canvas class="my-4 chartjs-render-monitor" id="myChart" width="1076" height="454" style="display: block; width: 1076px; height: 454px;"></canvas>
@@ -182,9 +196,11 @@ include_once('DashboardData.php');
     var myChart = new Chart(ctx, {
       type: 'line',
       data: {
-        labels: [[],"Horas trabajadas", "Horas estimadas de trabajo", "Horas proyectadas de trabajo", []],
+        labels: [
+          [], "Horas trabajadas", "Horas estimadas de trabajo", "Horas proyectadas de trabajo", []
+        ],
         datasets: [{
-          data: [,<?=$tiempo_trabajado_en_horas?>, <?= $horas_a_trabajar?>,<?= $tiempo_proyectado_en_horas?>, ],
+          data: [, <?= $tiempo_trabajado_en_horas ?>, <?= $horas_a_trabajar ?>, <?= $tiempo_proyectado_en_horas ?>, ],
           lineTension: 0,
           backgroundColor: 'transparent',
           borderColor: '#007bff',

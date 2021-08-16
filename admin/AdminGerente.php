@@ -12,7 +12,7 @@ if(isset($_GET['del'])){
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="ATLAS.ico">
+    <link rel="icon" href="imgs/ATLAS.ico">
     
 
     <title>Dashboard</title>
@@ -29,7 +29,7 @@ if(isset($_GET['del'])){
 
   <body data-new-gr-c-s-check-loaded="14.1022.0" data-gr-ext-installed="">
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-      <img src="ATLAS.ico" height="70" alt="ATLAS">
+      <img src="imgs/ATLAS.ico" height="70" alt="ATLAS">
       <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="">Atlas Admin</a>
       <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
       <ul class="navbar-nav px-3">

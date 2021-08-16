@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <link rel="icon" href="ATLAS.ico">
+  <link rel="icon" href="imgs/ATLAS.ico">
 
   <title>Signin</title>
 
@@ -29,14 +29,11 @@
   if ($_POST) {
 
     extract($_POST);
-    $sql = "SELECT * FROM `user` WHERE nombre = '{$username}' and pass = '{$pasoclave}'";
-    $rs = conexion::execute($sql);
-    $cont = mysqli_num_rows($rs);
-
-    $fila = $rs->fetch_row();
-
-    if ($cont != 0) {
-      $_SESSION['user'] = $fila[1];
+    $sql = "SELECT nombre, admin FROM `user` WHERE nombre = '{$username}' and pass = '{$pasoclave}'";
+    $fila = conexion::query_array($sql);
+    if (count($fila) != 0) {
+      $_SESSION['user'] = $fila[0]['nombre'];
+      $_SESSION['admin'] = $fila[0]['admin'] == 1;
     } else {
       $failToLoggin = true;
     }
@@ -48,7 +45,7 @@
 
 
   <form class="form-signin" action="" method="post">
-    <img class="mb-4" src="../ATLAS.ico" alt="" width="180" height="72">
+    <img class="mb-4" src="../imgs/ATLAS.ico" alt="" width="180" height="72">
     <h1 class="h3 mb-3 font-weight-normal">Indetificarse</h1>
     <?php if ($failToLoggin) : ?>
       <div class="text-left py-2">
