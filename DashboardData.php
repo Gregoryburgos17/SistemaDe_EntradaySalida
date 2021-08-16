@@ -29,7 +29,7 @@ foreach ($horas_ as $hora){
     $horas = substr($hora_proyectada,0,2);
     $minutos = substr($hora_proyectada,2,2);
     $segundos = substr($hora_proyectada,4,2);
-    $tiempo_proyectado_en_horas += $horas + ($minutos / 60) + ($segundos / 3600) - ($hora_actual > 120000 ? 1 : 0);
+    $tiempo_proyectado_en_horas += $horas + ($minutos / 60) + ($segundos / 3600) - 1;
 }
 
 // echo json_encode(['a_trabajar'=>$horas_a_trabajar, 'trabajadas' => $tiempo_trabajado_en_horas]);
