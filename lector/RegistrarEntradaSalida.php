@@ -18,7 +18,7 @@ $fecha = new DateTime();
  INPUT;
 
  $result = conexion::query_array($query);
-if(count($result) > 0){
+if(!empty($result)){
 
     $query = <<<INPUT
     UPDATE entrada_salida SET hora_salida = '{$fecha->format('H:i:s')}'
@@ -27,6 +27,8 @@ if(count($result) > 0){
     $response = conexion::execute($query);
     if($response){
         echo json_encode(['mensaje'=>'Salida Registrada con Exito', 'code'=> 200]);
+    }else{
+        echo json_encode(['mensaje'=>'Error procesando su peticion de registro de salida', 'code'=> 500]);
     }
     return;
 }
@@ -37,5 +39,7 @@ INPUT;
 $response = conexion::execute($query);
 if($response){
     echo json_encode(['mensaje'=>'Entrada Registrada con Exito', 'code'=> 200]);
+}else{
+    echo json_encode(['mensaje'=>'Error procesando su peticion de registro de entrada', 'code'=> 500]);
 }
 ?>
