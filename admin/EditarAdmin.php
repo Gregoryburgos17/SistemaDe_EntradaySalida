@@ -41,10 +41,10 @@ ob_end_flush();
   <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/dashboard/">
 
   <!-- Bootstrap core CSS -->
-  <link href="./Dashboard Template for Bootstrap_files/bootstrap.min.css" rel="stylesheet">
+  <link href="./libs/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="./Dashboard Template for Bootstrap_files/dashboard.css" rel="stylesheet">
+  <link href="./libs/dashboard.css" rel="stylesheet">
   <style type="text/css">
     /* Chart.js */
     @-webkit-keyframes chartjs-render-animation {
@@ -231,18 +231,18 @@ ob_end_flush();
   <!-- Bootstrap core JavaScript
     ================================================== -->
   <!-- Placed at the end of the document so the pages load faster -->
-  <script src="./Dashboard Template for Bootstrap_files/jquery-3.2.1.slim.min.js.descarga"></script>
+  <script src="./libs/jquery-3.2.1.slim.min.js.descarga"></script>
   <script>
     window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')
   </script>
-  <script src="./Dashboard Template for Bootstrap_files/popper.min.js.descarga"></script>
-  <script src="./Dashboard Template for Bootstrap_files/bootstrap.min.js.descarga"></script>
+  <script src="./libs/popper.min.js.descarga"></script>
+  <script src="./libs/bootstrap.min.js.descarga"></script>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <!-- Icons -->
-  <script src="./Dashboard Template for Bootstrap_files/feather.min.js.descarga"></script>
+  <script src="./libs/feather.min.js.descarga"></script>
   <script>
     feather.replace()
   </script>

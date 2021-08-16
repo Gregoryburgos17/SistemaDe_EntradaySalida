@@ -29,10 +29,10 @@ foreach ($result as $emp) {
   <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/dashboard/">
 
   <!-- Bootstrap core CSS -->
-  <link href="./Dashboard Template for Bootstrap_files/bootstrap.min.css" rel="stylesheet">
+  <link href="./libs/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="./Dashboard Template for Bootstrap_files/dashboard.css" rel="stylesheet">
+  <link href="./libs/dashboard.css" rel="stylesheet">
 
 </head>
 
@@ -178,15 +178,15 @@ foreach ($result as $emp) {
   <!-- Bootstrap core JavaScript
     ================================================== -->
   <!-- Placed at the end of the document so the pages load faster -->
-  <script src="./Dashboard Template for Bootstrap_files/jquery-3.2.1.slim.min.js"></script>
+  <script src="./libs/jquery-3.2.1.slim.min.js"></script>
   <script>
     window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')
   </script>
-  <script src="./Dashboard Template for Bootstrap_files/popper.min.js"></script>
-  <script src="./Dashboard Template for Bootstrap_files/bootstrap.min.js"></script>
+  <script src="./libs/popper.min.js"></script>
+  <script src="./libs/bootstrap.min.js"></script>
 
   <!-- Icons -->
-  <script src="./Dashboard Template for Bootstrap_files/feather.min.js"></script>
+  <script src="./libs/feather.min.js"></script>
   <script>
     feather.replace()
     let empleados = Array.from($('.nombre_empleado'))

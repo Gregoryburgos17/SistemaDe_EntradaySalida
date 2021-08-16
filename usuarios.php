@@ -40,10 +40,10 @@ if ($_POST) {
   <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/dashboard/">
 
   <!-- Bootstrap core CSS -->
-  <link href="./Dashboard Template for Bootstrap_files/bootstrap.min.css" rel="stylesheet">
+  <link href="./libs/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="./Dashboard Template for Bootstrap_files/dashboard.css" rel="stylesheet">
+  <link href="./libs/dashboard.css" rel="stylesheet">
 </head>
 
 <body data-new-gr-c-s-check-loaded="14.1022.0" data-gr-ext-installed="">
@@ -193,8 +193,7 @@ if ($_POST) {
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-
-          <h4 class="modal-title">Gerente</h4>
+          <h4 class="modal-title">Agregar usuario</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -202,19 +201,19 @@ if ($_POST) {
         <div class="modal-body">
           <form method="POST">
             <div class="mb-3">
-              <label for="recipient-name" class="col-form-label">Codigo de empleado</label>
-              <input type="text" class="form-control" id="recipient-name" name="id_emp">
+              <label for="recipient-name" class="col-form-label">Código de empleado</label>
+              <input type="text" class="form-control" name="id_emp">
             </div>
             <div class="mb-3">
               <label for="recipient-name" class="col-form-label">Nombre de Usuario</label>
-              <input type="text" class="form-control" id="recipient-name" name="nombre">
+              <input type="email" class="form-control" name="nombre">
             </div>
             <div class="mb-3">
               <label for="recipient-name" class="col-form-label">Contraseña</label>
-              <input type="text" class="form-control" id="recipient-name" name="passi">
+              <input type="password" class="form-control" name="passi">
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancerlar</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
               <button type="submit" class="btn btn-primary">Guardar</button>
             </div>
           </form>
@@ -227,12 +226,12 @@ if ($_POST) {
   <!-- Bootstrap core JavaScript
     ================================================== -->
   <!-- Placed at the end of the document so the pages load faster -->
-  <script src="./Dashboard Template for Bootstrap_files/jquery-3.2.1.slim.min.js"></script>
-  <script src="./Dashboard Template for Bootstrap_files/popper.min.js"></script>
-  <script src="./Dashboard Template for Bootstrap_files/bootstrap.min.js"></script>
+  <script src="./libs/jquery-3.2.1.slim.min.js"></script>
+  <script src="./libs/popper.min.js"></script>
+  <script src="./libs/bootstrap.min.js"></script>
 
   <!-- Icons -->
-  <script src="./Dashboard Template for Bootstrap_files/feather.min.js"></script>
+  <script src="./libs/feather.min.js"></script>
   <script>
     feather.replace()
   </script>
