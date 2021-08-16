@@ -52,13 +52,19 @@ button.mousedown(() => {
         method:'POST',
         body: JSON.stringify({id})
       })
-      let _response = await result.json()
+      let _response
+      try {
+        _response = await result.json()
+      } catch (error) {
+        showScanner("error", 'La peticion ha fallado revise su conexion')
+        return
+      }
       response = _response
       if(response.code === 200){
-        showScanner("success", response.mensaje);
+        showScanner("success", response.mensaje)
       }
       else{
-        showScanner("error", response.mensaje);
+        showScanner("error", response.mensaje)
       }
     }
     save()

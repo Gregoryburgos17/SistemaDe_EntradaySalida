@@ -157,9 +157,6 @@ include_once('DashboardData.php');
         </div>
 
         <canvas class="my-4 chartjs-render-monitor" id="myChart" width="1076" height="454" style="display: block; width: 1076px; height: 454px;"></canvas>
-
-
-
       </main>
     </div>
   </div>
