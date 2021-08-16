@@ -25,6 +25,10 @@ if (!(count($rs) > 0)) {
 }
 $empleado = $rs[0];
 
+
+$sql = "SELECT nombre FROM user WHERE id_usuario != {$_GET['edit']}";
+$correos = conexion::query_array($sql);
+
 if ($_POST) {
   extract($_POST);
   $update = "UPDATE user SET nombre='{$nombre}', pass='{$pass}', admin=$admin WHERE id_usuario='{$usuario['id_usuario']}'";
@@ -173,12 +177,13 @@ if ($_POST) {
             </div>
             <div class="form-group col-9">
               <label for="recipient-name" class="col-form-label">Nombre de empleado</label>
-              <input required type="text" class="form-control" readonly value="<?= $empleado['nombre'] . ' ' . $empleado['apellido'] ?>">
+              <input required  type="text" class="form-control" readonly value="<?= $empleado['nombre'] . ' ' . $empleado['apellido'] ?>">
             </div>
           </div>
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Nombre de Usuario</label>
-            <input required type="email" class="form-control" name="nombre" value="<?= $usuario['nombre'] ?>">
+            <label for="recipient-name" class="col-form-label">Nombre de usuario</label>
+            <input required type="email" class="form-control" name="nombre" value="<?= $usuario['nombre'] ?>" onchange="validarNombre(this)">
+            <span class="text-danger d-none">Este nombre de usuario ya esta en uso, escriba otro</span>
           </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Contraseña</label>
@@ -219,6 +224,17 @@ if ($_POST) {
   <script src="./libs/feather.min.js"></script>
   <script>
     feather.replace()
+    let usuarios = [...<?= json_encode($correos) ?>]
+    function validarNombre(e) {
+      console.log(e);
+      let nombre_seleccionado = usuarios.filter(usuario => usuario.nombre === e.value);
+      let element = $(e)
+      if (nombre_seleccionado.length > 0) {
+        element.val('').next().removeClass('d-none')
+      } else {
+        element.next().addClass('d-none')
+      }
+    }
   </script>
 
 

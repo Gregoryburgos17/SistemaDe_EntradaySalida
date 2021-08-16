@@ -13,9 +13,11 @@ if (isset($_GET['del'])) {
   conexion::execute($delete);
 }
 
-$sql = "SELECT U.*,CONCAT(E.nombre, ' ', E.apellido) empleado, E.posicion FROM user U JOIN empleados E ON U.id_empleado = E.id_empleado";
+$sql = "SELECT U.id_usuario, U.nombre, U.admin, U.id_empleado, CONCAT(E.nombre, ' ', E.apellido) empleado, E.posicion 
+FROM user U JOIN empleados E ON U.id_empleado = E.id_empleado";
+
 $usuarios = conexion::query_array($sql);
-$sql = "SELECT * FROM empleados WHERE estado = '1'";
+$sql = "SELECT id_empleado, nombre, apellido FROM empleados WHERE estado = '1'";
 $empleados = conexion::query_array($sql);
 
 if ($_POST) {
@@ -206,34 +208,37 @@ if ($_POST) {
           <form method="POST">
             <div class="mb-3">
               <label for="recipient-name" class="col-form-label">Código de empleado</label>
-              <input type="text" list="empleados" class="form-control" name="id_emp">
+              <input required type="text" list="empleados" class="form-control" name="id_emp" onchange="validarEmpleado(this)">
+              <span class="text-danger d-none" id='emp-invalido'>Escriba un código de empleado válido</span>
+              <span class="text-danger d-none" id='user-exist'>Este empleado ya posee un usuario</span>
               <datalist id="empleados">
-                <?php foreach ($empleados as $emp):?>
-                  <option value="<?=$emp['id_empleado']?>"><?=$emp['nombre'] . ' ' . $emp['apellido']?></option>
-                <?php endforeach;?>
+                <?php foreach ($empleados as $emp) : ?>
+                  <option value="<?= $emp['id_empleado'] ?>"><?= $emp['nombre'] . ' ' . $emp['apellido'] ?></option>
+                <?php endforeach; ?>
               </datalist>
             </div>
             <div class="mb-3">
               <label for="recipient-name" class="col-form-label">Nombre de Usuario</label>
-              <input type="email" class="form-control" name="nombre">
+              <input required type="email" class="form-control" name="nombre" onchange="validarNombre(this)">
+              <span class="text-danger d-none">Nombre de usuario ya esta en uso escriba otro</span>
             </div>
             <div class="mb-3">
               <label for="recipient-name" class="col-form-label">Contraseña</label>
-              <input type="password" class="form-control" name="passi">
+              <input required type="password" class="form-control" name="passi">
             </div>
             <div class="mb-3">
               <label for="recipient-name" class="col-form-label">Rol</label>
               <select class="custom-select" name="admin">
-                  <option value="0">
-                    Gerente
-                  </option>
-                  <option value="1">
-                    Administrador
-                  </option>
+                <option value="0">
+                  Gerente
+                </option>
+                <option value="1">
+                  Administrador
+                </option>
               </select>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
               <button type="submit" class="btn btn-primary">Guardar</button>
             </div>
           </form>
@@ -253,11 +258,35 @@ if ($_POST) {
   <!-- Icons -->
   <script src="./libs/feather.min.js"></script>
   <script>
+    let empleados = [...<?= json_encode($empleados) ?>]
+    let usuarios = [...<?= json_encode($usuarios) ?>]
+
+    function validarEmpleado(e) {
+      let empleado_seleccionado = empleados.filter(empleado => empleado.id_empleado === e.value);
+      let usuario_empleado = usuarios.filter(usuario => usuario.id_empleado === e.value);
+      if (empleado_seleccionado.length === 0 ) {
+        $(e).val('')
+        $('#emp-invalido').removeClass('d-none')
+      } else if(usuario_empleado.length !== 0){
+        $(e).val('')
+        $('#user-exist').removeClass('d-none')
+      }else {
+        $('#emp-invalido').addClass('d-none')
+        $('#user-exist').addClass('d-none')
+      }
+    }
+
+    function validarNombre(e) {
+      let nombre_seleccionado = usuarios.filter(usuario => usuario.nombre === e.value);
+      let element = $(e)
+      if (nombre_seleccionado.length > 0) {
+        element.val('').next().removeClass('d-none')
+      } else {
+        element.next().addClass('d-none')
+      }
+    }
     feather.replace()
   </script>
-
-
-
 
 </body>
 <grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration>

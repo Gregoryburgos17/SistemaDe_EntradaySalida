@@ -19,7 +19,7 @@ $meses = conexion::query_array('SELECT fecha FROM `entrada_salida` GROUP by YEAR
 
   <title>Dashboard</title>
 
-  
+
 
   <!-- Bootstrap core CSS -->
   <link href="./libs/bootstrap.min.css" rel="stylesheet">
@@ -150,10 +150,10 @@ $meses = conexion::query_array('SELECT fecha FROM `entrada_salida` GROUP by YEAR
                 $fecha = new DateTime($mes['fecha']);
               ?>
                 <tr>
-                  <td>Reporte del mes <?="{$fecha->format('m')} de {$fecha->format('Y')}"?></td>
+                  <td>Reporte del mes <?= "{$fecha->format('m')} de {$fecha->format('Y')}" ?></td>
                   <td>
                     <div class="d-grid gap-2 d-md-block">
-                      <a class="btn btn-success" href="print.php?fecha=<?=$mes['fecha']?>">
+                      <a class="btn btn-success" href="print.php?fecha=<?= $mes['fecha'] ?>">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
                           <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                           <polyline points="14 2 14 8 20 8"></polyline>
@@ -178,9 +178,6 @@ $meses = conexion::query_array('SELECT fecha FROM `entrada_salida` GROUP by YEAR
     ================================================== -->
   <!-- Placed at the end of the document so the pages load faster -->
   <script src="./libs/jquery-3.2.1.slim.min.js"></script>
-  <script>
-    window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')
-  </script>
   <script src="./libs/popper.min.js"></script>
   <script src="./libs/bootstrap.min.js"></script>
 
@@ -189,12 +186,6 @@ $meses = conexion::query_array('SELECT fecha FROM `entrada_salida` GROUP by YEAR
   <script>
     feather.replace()
   </script>
-
-  <!-- Graphs -->
-  <script src="./libs/Chart.min.js"></script>
-
-
-
 </body>
 <grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration>
 
