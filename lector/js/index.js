@@ -7,7 +7,7 @@ const setFecha = () => {
   let _date = new Date();
   divFecha.empty();
   let fecha = `${withZero(_date.getDate())}/${withZero(
-    _date.getMonth()
+    _date.getMonth() + 1
   )}/${withZero(_date.getFullYear())}`;
 
   let hora = `${withZero(_date.getHours())}:${withZero(
